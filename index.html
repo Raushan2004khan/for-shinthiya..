@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>I'm Truly Sorry, Shinthiya ❤️</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
       --primary-dark: #d90429;
       --soft-rose: #ffccd5;
       --bg-cream: #fff0f3;
-      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-bg: rgba(255, 255, 255, 0.95);
       --text-main: #3d1326;
       --text-muted: #7d4f64;
     }
@@ -35,46 +35,24 @@
       position: relative;
     }
 
-    /* Floating Petals Canvas */
-    #petals-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Music Controller Widget */
+    /* Fixed Top Floating Music Controller */
     .music-widget {
       position: fixed;
-      top: 18px;
-      right: 18px;
-      z-index: 9999;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1.5px solid rgba(255, 71, 126, 0.35);
-      padding: 8px 18px;
+      top: 14px;
+      right: 14px;
+      z-index: 99999;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      padding: 8px 16px;
       border-radius: 50px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 10px 25px rgba(255, 71, 126, 0.22);
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(255, 71, 126, 0.3);
       cursor: pointer;
-      user-select: none;
-      transition: all 0.3s ease;
-    }
-    .music-widget:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 14px 30px rgba(255, 71, 126, 0.3);
-    }
-    .music-icon {
-      font-size: 1.25rem;
     }
     .music-title {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--primary);
     }
@@ -89,37 +67,34 @@
       height: 4px;
       background: var(--primary);
       border-radius: 2px;
-      transition: height 0.2s;
     }
-    .sound-bars.playing .bar:nth-child(1) { animation: soundEq 0.9s infinite alternate ease-in-out; }
-    .sound-bars.playing .bar:nth-child(2) { animation: soundEq 0.7s infinite alternate 0.2s ease-in-out; }
-    .sound-bars.playing .bar:nth-child(3) { animation: soundEq 1.1s infinite alternate 0.4s ease-in-out; }
+    .sound-bars.playing .bar:nth-child(1) { animation: soundEq 0.8s infinite alternate ease-in-out; }
+    .sound-bars.playing .bar:nth-child(2) { animation: soundEq 0.6s infinite alternate 0.2s ease-in-out; }
+    .sound-bars.playing .bar:nth-child(3) { animation: soundEq 1.0s infinite alternate 0.4s ease-in-out; }
     @keyframes soundEq {
       0% { height: 3px; }
       100% { height: 14px; }
     }
 
-    /* Main Container */
     .container {
       position: relative;
       z-index: 10;
-      max-width: 680px;
+      max-width: 580px;
       margin: 0 auto;
-      padding: 70px 20px 60px;
+      padding: 60px 18px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
-    /* Subtitle & Header */
     .badge {
       display: inline-block;
       background: rgba(255, 71, 126, 0.12);
       color: var(--primary-dark);
       padding: 6px 18px;
       border-radius: 50px;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -129,69 +104,57 @@
 
     h1.title {
       font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
+      font-size: 2.2rem;
       color: var(--primary-dark);
       line-height: 1.25;
       margin-bottom: 8px;
     }
     h1.title span {
       font-family: 'Great Vibes', cursive;
-      font-size: 3.5rem;
+      font-size: 3rem;
       color: var(--primary);
-      display: inline-block;
-      margin: 0 4px;
     }
 
     .subheading {
-      font-size: 1rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
       margin-bottom: 24px;
-      font-weight: 400;
       line-height: 1.5;
     }
 
-    /* Sincere Apology Photo Card */
     .photo-card {
       background: #fff;
-      padding: 14px 14px 18px;
+      padding: 12px 12px 16px;
       border-radius: 20px;
-      box-shadow: 0 16px 36px rgba(255, 71, 126, 0.18), 0 2px 10px rgba(0,0,0,0.04);
-      margin-bottom: 35px;
-      max-width: 320px;
+      box-shadow: 0 16px 36px rgba(255, 71, 126, 0.18);
+      margin-bottom: 28px;
+      max-width: 300px;
       width: 100%;
-      transform: rotate(-1.5deg);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
       border: 1px solid rgba(255, 204, 213, 0.6);
-    }
-    .photo-card:hover {
-      transform: rotate(0deg) scale(1.02);
-      box-shadow: 0 22px 42px rgba(255, 71, 126, 0.26);
     }
     .photo-wrapper {
       position: relative;
       border-radius: 14px;
       overflow: hidden;
       width: 100%;
-      height: 340px;
+      height: 330px;
       background: #fafafa;
     }
     .photo-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
       display: block;
     }
     .photo-badge {
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.75);
       color: #fff;
       font-size: 0.75rem;
-      padding: 4px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
       white-space: nowrap;
     }
@@ -200,74 +163,55 @@
       font-family: 'Caveat', cursive;
       font-size: 1.35rem;
       color: var(--primary-dark);
-      line-height: 1.3;
     }
 
-    /* Letter Envelope Section */
     .letter-section {
       width: 100%;
-      margin-bottom: 35px;
+      margin-bottom: 26px;
     }
     .envelope-box {
       background: #ffffff;
       border-radius: 20px;
-      padding: 28px 24px;
-      box-shadow: 0 15px 35px rgba(255, 71, 126, 0.12);
-      border: 1.5px dashed rgba(255, 71, 126, 0.4);
-      position: relative;
+      padding: 24px 20px;
+      box-shadow: 0 12px 30px rgba(255, 71, 126, 0.12);
+      border: 2px dashed rgba(255, 71, 126, 0.45);
       cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .envelope-box:hover {
-      box-shadow: 0 18px 40px rgba(255, 71, 126, 0.2);
+      user-select: none;
     }
     .wax-seal {
-      width: 58px;
-      height: 58px;
+      width: 52px;
+      height: 52px;
       background: radial-gradient(circle, #e63946, #9b111e);
       border-radius: 50%;
-      margin: 0 auto 12px;
+      margin: 0 auto 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ffd700;
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: bold;
-      box-shadow: 0 4px 14px rgba(155, 17, 30, 0.4);
       border: 2px solid #ff7b90;
-      transition: transform 0.3s ease;
-    }
-    .envelope-box:hover .wax-seal {
-      transform: scale(1.1) rotate(5deg);
     }
     .envelope-hint {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
     }
-
-    /* Unfolded Letter Content */
     .letter-content {
       display: none;
       background: #fffdf9;
       border-radius: 16px;
-      padding: 24px 22px;
-      margin-top: 18px;
+      padding: 20px;
+      margin-top: 16px;
       text-align: left;
       border: 1px solid #fae1dd;
-      box-shadow: inset 0 0 15px rgba(255, 182, 193, 0.15);
-      animation: unfold 0.5s ease forwards;
-    }
-    @keyframes unfold {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     .letter-greeting {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--primary-dark);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .letter-text {
       font-size: 0.92rem;
@@ -280,114 +224,95 @@
       font-size: 1.45rem;
       color: var(--primary);
       text-align: right;
-      margin-top: 10px;
     }
 
-    /* Interactive Promise Cards */
     .cards-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
+      gap: 12px;
       width: 100%;
-      margin-bottom: 35px;
+      margin-bottom: 26px;
     }
-    @media (max-width: 480px) {
+    @media (max-width: 460px) {
       .cards-grid {
         grid-template-columns: 1fr;
       }
     }
     .mini-card {
       background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      padding: 20px 16px;
+      padding: 18px 14px;
       border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(255, 107, 107, 0.08);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.9);
-      transition: transform 0.3s ease;
-    }
-    .mini-card:hover {
-      transform: translateY(-4px);
     }
     .mini-card .icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
+      font-size: 1.8rem;
+      margin-bottom: 6px;
     }
     .mini-card h3 {
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       color: var(--primary-dark);
-      margin-bottom: 6px;
-      font-weight: 600;
+      margin-bottom: 4px;
     }
     .mini-card p {
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
-    /* Forgiveness Interactive Arena */
     .decision-area {
       background: #ffffff;
       border-radius: 24px;
-      padding: 35px 25px;
+      padding: 28px 18px;
       width: 100%;
-      box-shadow: 0 20px 45px rgba(255, 71, 126, 0.15);
+      box-shadow: 0 16px 36px rgba(255, 71, 126, 0.15);
       border: 1px solid rgba(255, 204, 213, 0.8);
-      margin-bottom: 25px;
       position: relative;
     }
     .decision-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       color: var(--primary-dark);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .decision-sub {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
     .btn-wrap {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       position: relative;
       min-height: 70px;
     }
-
     .btn-yes {
       background: linear-gradient(135deg, #ff477e, #ff0a54);
       color: #fff;
       border: none;
-      padding: 14px 34px;
+      padding: 14px 28px;
       border-radius: 50px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(255, 10, 84, 0.35);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 22px rgba(255, 10, 84, 0.35);
       z-index: 5;
     }
-    .btn-yes:hover {
-      transform: scale(1.08);
-      box-shadow: 0 14px 30px rgba(255, 10, 84, 0.45);
-    }
-
     .btn-no {
       background: #f1f3f5;
       color: #6c757d;
       border: 1px solid #ced4da;
-      padding: 14px 26px;
+      padding: 12px 20px;
       border-radius: 50px;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 500;
       cursor: pointer;
       position: relative;
-      transition: all 0.2s ease;
-      user-select: none;
+      touch-action: manipulation;
     }
 
-    /* Modal / Pop-up when Accepted */
     .success-modal {
       position: fixed;
       top: 0;
@@ -396,7 +321,7 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(8px);
-      z-index: 99999;
+      z-index: 999999;
       display: none;
       align-items: center;
       justify-content: center;
@@ -404,77 +329,52 @@
     }
     .modal-box {
       background: #ffffff;
-      max-width: 440px;
+      max-width: 400px;
       width: 100%;
-      border-radius: 26px;
-      padding: 35px 25px;
+      border-radius: 24px;
+      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    @keyframes popIn {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
     .modal-emoji {
-      font-size: 3.5rem;
-      margin-bottom: 12px;
+      font-size: 3rem;
+      margin-bottom: 10px;
     }
     .modal-box h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: var(--primary-dark);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .modal-box p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
+      line-height: 1.5;
+      margin-bottom: 18px;
     }
     .close-modal-btn {
       background: linear-gradient(135deg, #ff477e, #ff0a54);
       color: #fff;
       border: none;
-      padding: 12px 28px;
+      padding: 12px 26px;
       border-radius: 50px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-    }
-
-    /* First Touch Audio Toast */
-    .audio-notice {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.78);
-      color: #fff;
-      font-size: 0.8rem;
-      padding: 8px 18px;
-      border-radius: 30px;
-      backdrop-filter: blur(6px);
-      z-index: 100;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Canvas for Sakura Petals -->
-  <canvas id="petals-canvas"></canvas>
-
-  <!-- Audio Element with your music link -->
-  <audio id="bg-music" loop preload="auto">
+  <!-- Audio Element -->
+  <audio id="bg-music" loop playsinline preload="auto">
     <source src="https://files.catbox.moe/2wjewq.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Music Controller Bar -->
-  <div class="music-widget" id="musicWidget" onclick="toggleMusic()">
-    <span class="music-icon" id="musicIcon">🎵</span>
-    <span class="music-title" id="musicTitle">Play For Shinthiya</span>
+  <!-- Top Controller Widget -->
+  <div class="music-widget" id="musicWidget">
+    <span id="musicIcon">🎵</span>
+    <span class="music-title" id="musicTitle">Play Music</span>
     <div class="sound-bars" id="soundBars">
       <span class="bar"></span>
       <span class="bar"></span>
@@ -482,35 +382,29 @@
     </div>
   </div>
 
-  <!-- Audio Touch Hint Toast -->
-  <div class="audio-notice" id="audioNotice">
-    🎧 Tap anywhere on screen to play music
-  </div>
-
   <div class="container">
-
     <div class="badge">A Message Straight From My Heart</div>
     <h1 class="title">I'm Truly Sorry, <span>Shinthiya</span></h1>
     <p class="subheading">
       Seeing you upset because of me hurts worse than anything. I want to make things right.
     </p>
 
-    <!-- Photo of Grabbing Ear as Sincere Apology -->
+    <!-- Photo Card -->
     <div class="photo-card">
       <div class="photo-wrapper">
-        <img src="https://files.catbox.moe/nnxb4h.jpg" alt="Grabbing my ear to say sorry to Shinthiya" />
-        <span class="photo-badge"> कान पकड़ कर सॉरी 🥺</span>
+        <img src="https://files.catbox.moe/nnxb4h.jpg" alt="Grabbing my ear to say sorry" />
+        <span class="photo-badge">कान पकड़ कर सॉरी 🥺</span>
       </div>
       <div class="photo-caption">
         "Yes, this is me... holding my ear and truly admitting I was wrong. Please forgive me, Shinthiya."
       </div>
     </div>
 
-    <!-- Interactive Envelope & Letter -->
+    <!-- Letter Section -->
     <div class="letter-section">
-      <div class="envelope-box" id="envelopeBox" onclick="openLetter()">
+      <div class="envelope-box" id="envelopeBox">
         <div class="wax-seal">S</div>
-        <div class="envelope-hint" id="envelopeHint">✉️ Click here to open my personal letter for you</div>
+        <div class="envelope-hint" id="envelopeHint">✉️ Tap here to open my personal letter for you</div>
         
         <div class="letter-content" id="letterContent">
           <div class="letter-greeting">Dearest Shinthiya,</div>
@@ -528,7 +422,7 @@
       </div>
     </div>
 
-    <!-- Sincere Promises Grid -->
+    <!-- Promises -->
     <div class="cards-grid">
       <div class="mini-card">
         <div class="icon">👂</div>
@@ -552,20 +446,19 @@
       </div>
     </div>
 
-    <!-- Forgiveness Interactive Arena with Runaway Button -->
+    <!-- Runaway Arena -->
     <div class="decision-area">
       <h2 class="decision-title">Will You Forgive Me, Shinthiya?</h2>
       <p class="decision-sub">Even if you are still a tiny bit mad... do I get one more hug? 🥺</p>
       
       <div class="btn-wrap">
-        <button class="btn-yes" id="btnYes" onclick="onForgive()">Yes, I Forgive You ❤️</button>
-        <button class="btn-no" id="btnNo" onmouseover="dodgeButton()" onclick="dodgeButton()">No, Still Mad 😤</button>
+        <button class="btn-yes" id="btnYes">Yes, I Forgive You ❤️</button>
+        <button class="btn-no" id="btnNo">No, Still Mad 😤</button>
       </div>
     </div>
-
   </div>
 
-  <!-- Celebratory Acceptance Modal -->
+  <!-- Success Modal -->
   <div class="success-modal" id="successModal">
     <div class="modal-box">
       <div class="modal-emoji">💖🥰✨</div>
@@ -573,110 +466,107 @@
       <p>
         Your forgiveness is the most precious gift. I promise to treasure your heart and treat you with all the love and gentleness you deserve!
       </p>
-      <button class="close-modal-btn" onclick="closeModal()">Big Hug Accepted 🤗</button>
+      <button class="close-modal-btn" id="closeModalBtn">Big Hug Accepted 🤗</button>
     </div>
   </div>
 
   <script>
-    /* Audio Handling */
-    const bgMusic = document.getElementById('bg-music');
-    const musicWidget = document.getElementById('musicWidget');
-    const musicIcon = document.getElementById('musicIcon');
+    const music = document.getElementById('bg-music');
     const musicTitle = document.getElementById('musicTitle');
+    const musicIcon = document.getElementById('musicIcon');
     const soundBars = document.getElementById('soundBars');
-    const audioNotice = document.getElementById('audioNotice');
+    const musicWidget = document.getElementById('musicWidget');
     let isPlaying = false;
 
-    function startMusic() {
-      bgMusic.volume = 0.55;
-      bgMusic.play().then(() => {
+    function playAudio() {
+      music.volume = 0.6;
+      music.play().then(() => {
         isPlaying = true;
         musicIcon.textContent = '⏸️';
-        musicTitle.textContent = 'Playing for Shinthiya';
+        musicTitle.textContent = 'Playing';
         soundBars.classList.add('playing');
-        if (audioNotice) {
-          audioNotice.style.opacity = '0';
-          setTimeout(() => audioNotice.remove(), 600);
-        }
       }).catch(err => {
-        console.log("Autoplay waiting for direct tap:", err);
+        console.warn("Audio tap required:", err);
       });
     }
 
-    function toggleMusic() {
+    function toggleMusic(e) {
+      if (e) e.stopPropagation();
       if (!isPlaying) {
-        startMusic();
+        playAudio();
       } else {
-        bgMusic.pause();
+        music.pause();
         isPlaying = false;
         musicIcon.textContent = '🎵';
-        musicTitle.textContent = 'Play Song';
+        musicTitle.textContent = 'Play Music';
         soundBars.classList.remove('playing');
       }
     }
 
-    /* Start music on very first touch/click anywhere */
-    ['touchstart', 'pointerdown', 'click'].forEach(evtType => {
-      document.addEventListener(evtType, function autoPlayTrigger() {
-        if (!isPlaying) {
-          startMusic();
-        }
-      }, { once: true });
+    musicWidget.addEventListener('click', toggleMusic);
+
+    // Letter Toggle
+    const envelopeBox = document.getElementById('envelopeBox');
+    const letterContent = document.getElementById('letterContent');
+    const envelopeHint = document.getElementById('envelopeHint');
+
+    envelopeBox.addEventListener('click', function() {
+      if (!isPlaying) playAudio();
+      if (letterContent.style.display !== 'block') {
+        letterContent.style.display = 'block';
+        envelopeHint.textContent = '💌 Written with all my sincerity:';
+      } else {
+        letterContent.style.display = 'none';
+        envelopeHint.textContent = '✉️ Tap here to open my personal letter for you';
+      }
     });
 
-    /* Open Wax Letter */
-    function openLetter() {
-      const content = document.getElementById('letterContent');
-      const hint = document.getElementById('envelopeHint');
-      if (content.style.display !== 'block') {
-        content.style.display = 'block';
-        hint.textContent = '💌 Written with all my sincerity:';
-      }
-    }
-
-    /* Runaway "No" Button Logic */
+    // Dodge Button
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
     let dodgeCount = 0;
     const dodgePhrases = [
-      "Are you sure, Shinthiya? 🥺",
-      "Look at my photo holding my ear! 🥲",
-      "I brought your favorite snacks! 🍫",
-      "Please give me one hug? 🥺",
-      "You can't catch this button! 🏃💨",
-      "Just click Yes already! ❤️"
+      "Are you sure? 🥺",
+      "Look at my photo! 🥲",
+      "I brought snacks! 🍫",
+      "One hug please? 🥺",
+      "Can't catch me! 🏃💨",
+      "Just say Yes ❤️"
     ];
 
-    function dodgeButton() {
-      const btnNo = document.getElementById('btnNo');
-      const btnYes = document.getElementById('btnYes');
-      
-      const maxX = 160;
-      const maxY = 80;
-      const randomX = (Math.random() - 0.5) * (maxX * 2);
-      const randomY = (Math.random() - 0.5) * (maxY * 2);
-      
+    function handleDodge(e) {
+      if (e) e.preventDefault();
+      if (!isPlaying) playAudio();
+      const randomX = (Math.random() - 0.5) * 180;
+      const randomY = (Math.random() - 0.5) * 100;
       btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
       btnNo.textContent = dodgePhrases[dodgeCount % dodgePhrases.length];
-      
       dodgeCount++;
-
       const currentScale = 1 + (dodgeCount * 0.08);
-      btnYes.style.transform = `scale(${Math.min(currentScale, 1.45)})`;
+      btnYes.style.transform = `scale(${Math.min(currentScale, 1.35)})`;
     }
 
-    /* On Forgiveness Click */
-    function onForgive() {
+    btnNo.addEventListener('touchstart', handleDodge, { passive: false });
+    btnNo.addEventListener('click', handleDodge);
+
+    // Yes Button
+    btnYes.addEventListener('click', function() {
+      if (!isPlaying) playAudio();
       document.getElementById('successModal').style.display = 'flex';
-      
       if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 120,
-          spread: 80,
-          origin: { y: 0.6 }
-        });
-        setTimeout(() => {
-          confetti({
-            particleCount: 80,
-            angle: 60,
-            spread: 60,
-            origin: { x: 0 }
-          });
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      }
+    });
+
+    // Modal Close
+    document.getElementById('closeModalBtn').addEventListener('click', function() {
+      document.getElementById('successModal').style.display = 'none';
+    });
+
+    // Tap anywhere on document once to begin music
+    document.body.addEventListener('touchstart', function() {
+      if (!isPlaying) playAudio();
+    }, { once: true });
+  </script>
+</body>
+</html>
