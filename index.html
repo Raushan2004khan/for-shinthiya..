@@ -6,17 +6,17 @@
   <title>I'm Truly Sorry, Shinthiya ❤️</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
-      --primary: #ff477e;
-      --primary-dark: #d90429;
-      --soft-rose: #ffccd5;
-      --bg-cream: #fff0f3;
-      --card-bg: rgba(255, 255, 255, 0.95);
-      --text-main: #3d1326;
-      --text-muted: #7d4f64;
+      --primary: #ff2a6d;
+      --primary-dark: #b3003b;
+      --primary-glow: rgba(255, 42, 109, 0.45);
+      --glass-panel: rgba(255, 255, 255, 0.82);
+      --glass-border: rgba(255, 255, 255, 0.95);
+      --text-main: #2b0b1a;
+      --text-muted: #6b3d54;
     }
 
     * {
@@ -28,449 +28,823 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fff0f3 0%, #ffe3e8 50%, #ffd6e0 100%);
+      background: radial-gradient(circle at 50% 10%, #fff0f5 0%, #ffd6e5 45%, #ffb3cc 100%);
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
+      perspective: 1200px;
       position: relative;
     }
 
-    /* Fixed Top Floating Music Controller */
-    .music-widget {
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      z-index: 99999;
-      background: #ffffff;
-      border: 2px solid var(--primary);
-      padding: 8px 16px;
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 6px 18px rgba(255, 71, 126, 0.3);
-      cursor: pointer;
-    }
-    .music-title {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-    .sound-bars {
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 14px;
-    }
-    .sound-bars .bar {
-      width: 3px;
-      height: 4px;
-      background: var(--primary);
-      border-radius: 2px;
-    }
-    .sound-bars.playing .bar:nth-child(1) { animation: soundEq 0.8s infinite alternate ease-in-out; }
-    .sound-bars.playing .bar:nth-child(2) { animation: soundEq 0.6s infinite alternate 0.2s ease-in-out; }
-    .sound-bars.playing .bar:nth-child(3) { animation: soundEq 1.0s infinite alternate 0.4s ease-in-out; }
-    @keyframes soundEq {
-      0% { height: 3px; }
-      100% { height: 14px; }
-    }
-
-    .container {
-      position: relative;
-      z-index: 10;
-      max-width: 580px;
-      margin: 0 auto;
-      padding: 60px 18px 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-block;
-      background: rgba(255, 71, 126, 0.12);
-      color: var(--primary-dark);
-      padding: 6px 18px;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-      border: 1px solid rgba(255, 71, 126, 0.2);
-    }
-
-    h1.title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      color: var(--primary-dark);
-      line-height: 1.25;
-      margin-bottom: 8px;
-    }
-    h1.title span {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3rem;
-      color: var(--primary);
-    }
-
-    .subheading {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-
-    .photo-card {
-      background: #fff;
-      padding: 12px 12px 16px;
-      border-radius: 20px;
-      box-shadow: 0 16px 36px rgba(255, 71, 126, 0.18);
-      margin-bottom: 28px;
-      max-width: 300px;
-      width: 100%;
-      border: 1px solid rgba(255, 204, 213, 0.6);
-    }
-    .photo-wrapper {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      width: 100%;
-      height: 330px;
-      background: #fafafa;
-    }
-    .photo-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .photo-badge {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.75);
-      color: #fff;
-      font-size: 0.75rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-    .photo-caption {
-      margin-top: 12px;
-      font-family: 'Caveat', cursive;
-      font-size: 1.35rem;
-      color: var(--primary-dark);
-    }
-
-    .letter-section {
-      width: 100%;
-      margin-bottom: 26px;
-    }
-    .envelope-box {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 24px 20px;
-      box-shadow: 0 12px 30px rgba(255, 71, 126, 0.12);
-      border: 2px dashed rgba(255, 71, 126, 0.45);
-      cursor: pointer;
-      user-select: none;
-    }
-    .wax-seal {
-      width: 52px;
-      height: 52px;
-      background: radial-gradient(circle, #e63946, #9b111e);
-      border-radius: 50%;
-      margin: 0 auto 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffd700;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: bold;
-      border: 2px solid #ff7b90;
-    }
-    .envelope-hint {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-    .letter-content {
-      display: none;
-      background: #fffdf9;
-      border-radius: 16px;
-      padding: 20px;
-      margin-top: 16px;
-      text-align: left;
-      border: 1px solid #fae1dd;
-    }
-    .letter-greeting {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2rem;
-      color: var(--primary-dark);
-      margin-bottom: 10px;
-    }
-    .letter-text {
-      font-size: 0.92rem;
-      line-height: 1.75;
-      color: #4a2835;
-      margin-bottom: 12px;
-    }
-    .letter-sign {
-      font-family: 'Caveat', cursive;
-      font-size: 1.45rem;
-      color: var(--primary);
-      text-align: right;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      width: 100%;
-      margin-bottom: 26px;
-    }
-    @media (max-width: 460px) {
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .mini-card {
-      background: var(--card-bg);
-      padding: 18px 14px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-    }
-    .mini-card .icon {
-      font-size: 1.8rem;
-      margin-bottom: 6px;
-    }
-    .mini-card h3 {
-      font-size: 0.95rem;
-      color: var(--primary-dark);
-      margin-bottom: 4px;
-    }
-    .mini-card p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .decision-area {
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 28px 18px;
-      width: 100%;
-      box-shadow: 0 16px 36px rgba(255, 71, 126, 0.15);
-      border: 1px solid rgba(255, 204, 213, 0.8);
-      position: relative;
-    }
-    .decision-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.45rem;
-      color: var(--primary-dark);
-      margin-bottom: 6px;
-    }
-    .decision-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 22px;
-    }
-    .btn-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
-      position: relative;
-      min-height: 70px;
-    }
-    .btn-yes {
-      background: linear-gradient(135deg, #ff477e, #ff0a54);
-      color: #fff;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 22px rgba(255, 10, 84, 0.35);
-      z-index: 5;
-    }
-    .btn-no {
-      background: #f1f3f5;
-      color: #6c757d;
-      border: 1px solid #ced4da;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-size: 0.88rem;
-      font-weight: 500;
-      cursor: pointer;
-      position: relative;
-      touch-action: manipulation;
-    }
-
-    .success-modal {
+    #ambient-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.65);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(65px);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.55;
+      animation: orbFloat 10s infinite alternate ease-in-out;
+    }
+    .glow-orb-1 { width: 320px; height: 320px; background: #ff5277; top: -80px; left: -90px; }
+    .glow-orb-2 { width: 350px; height: 350px; background: #ff2a6d; bottom: 5%; right: -100px; animation-duration: 14s; }
+    .glow-orb-3 { width: 220px; height: 220px; background: #ffccd9; top: 45%; left: -50px; animation-duration: 8s; }
+    @keyframes orbFloat {
+      0% { transform: translateY(0px) rotate(0deg) scale(1); }
+      100% { transform: translateY(45px) rotate(15deg) scale(1.12); }
+    }
+
+    .music-dock {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 99999;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 2px solid var(--glass-border);
+      padding: 9px 18px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 28px var(--primary-glow), inset 0 2px 3px rgba(255, 255, 255, 0.9);
+      cursor: pointer;
+      user-select: none;
+    }
+    .music-dock:active { transform: scale(0.92); }
+    .music-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.8px; }
+    .equalizer-bars { display: flex; align-items: flex-end; gap: 3px; height: 15px; }
+    .equalizer-bars .bar { width: 3px; height: 4px; background: var(--primary); border-radius: 3px; }
+    .equalizer-bars.playing .bar:nth-child(1) { animation: soundEq 0.7s infinite alternate ease-in-out; }
+    .equalizer-bars.playing .bar:nth-child(2) { animation: soundEq 0.5s infinite alternate 0.15s ease-in-out; }
+    .equalizer-bars.playing .bar:nth-child(3) { animation: soundEq 0.9s infinite alternate 0.35s ease-in-out; }
+    @keyframes soundEq { 0% { height: 3px; } 100% { height: 15px; } }
+
+    .viewport-container {
+      position: relative;
+      z-index: 10;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 68px 18px 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transform-style: preserve-3d;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      color: var(--primary-dark);
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      border: 1.5px solid var(--glass-border);
+      box-shadow: 0 10px 22px rgba(255, 42, 109, 0.15), inset 0 2px 2px #fff;
+    }
+
+    h1.hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 15px rgba(179, 0, 59, 0.18);
+    }
+    h1.hero-title span {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: var(--primary);
+      display: inline-block;
+      filter: drop-shadow(0 6px 10px rgba(255, 42, 109, 0.35));
+    }
+
+    .hero-sub {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .tilt-stage {
+      perspective: 1000px;
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .polaroid-3d {
+      background: #ffffff;
+      padding: 14px 14px 22px;
+      border-radius: 26px;
+      box-shadow: 
+        0 30px 60px -12px rgba(255, 42, 109, 0.42),
+        0 16px 28px -8px rgba(0, 0, 0, 0.12),
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.95);
+      transform: rotateY(0deg) rotateX(4deg) translateZ(10px);
+      transition: transform 0.18s ease-out;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .photo-viewport {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      width: 100%;
+      height: 330px;
+      background: #ffeef2;
+      box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.08);
+      transform: translateZ(18px);
+    }
+    .photo-viewport img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ear-badge-3d {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(30px);
+      background: rgba(18, 2, 8, 0.82);
       backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+      white-space: nowrap;
+    }
+    .photo-handwritten {
+      margin-top: 14px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.45rem;
+      color: var(--primary-dark);
+      transform: translateZ(14px);
+      line-height: 1.35;
+    }
+
+    /* 4 HEART BALLOONS STAGE */
+    .balloon-game-box {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 24px 16px;
+      box-shadow: 0 20px 45px rgba(255, 42, 109, 0.18);
+      border: 1.5px solid rgba(255, 204, 213, 0.9);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-badge {
+      display: inline-block;
+      background: #ffe5ec;
+      color: var(--primary-dark);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .game-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+    .game-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .balloons-arena {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 10px 0 20px;
+      position: relative;
+    }
+    .balloon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .balloon-item:active { transform: scale(0.92); }
+    .balloon-heart {
+      width: 62px;
+      height: 58px;
+      position: relative;
+      background: radial-gradient(circle at 35% 35%, #ff6b8b, #ff0f50 70%);
+      transform: rotate(-45deg);
+      border-radius: 50% 50% 0 0;
+      box-shadow: 0 10px 20px rgba(255, 15, 80, 0.35), inset 0 2px 5px rgba(255,255,255,0.6);
+      animation: floatBalloon 3s ease-in-out infinite alternate;
+    }
+    .balloon-heart::before {
+      content: '';
+      width: 62px;
+      height: 58px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: inherit;
+      border-radius: 50% 50% 0 0;
+      transform: rotate(90deg);
+      transform-origin: 50% 50%;
+      box-shadow: inherit;
+    }
+    .balloon-string {
+      width: 2px;
+      height: 25px;
+      background: rgba(255, 42, 109, 0.4);
+      margin-top: 18px;
+      border-radius: 2px;
+    }
+    .balloon-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-top: 4px;
+    }
+
+    .b-1 .balloon-heart { animation-delay: 0s; }
+    .b-2 .balloon-heart { animation-delay: 0.6s; background: radial-gradient(circle at 35% 35%, #ff8da6, #ff2a6d 70%); }
+    .b-3 .balloon-heart { animation-delay: 1.2s; background: radial-gradient(circle at 35% 35%, #ff6b8b, #e0004d 70%); }
+    .b-4 .balloon-heart { animation-delay: 1.8s; background: radial-gradient(circle at 35% 35%, #ffa6b9, #ff1a60 70%); }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(0px) rotate(-45deg); }
+      100% { transform: translateY(-12px) rotate(-42deg); }
+    }
+
+    .bow-container {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: #fff0f5;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px dashed var(--primary);
+    }
+
+    .flying-arrow {
+      position: fixed;
+      font-size: 2.2rem;
+      pointer-events: none;
+      z-index: 999999;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    /* ========================================================
+       NEW SUPER-PLAYFUL MULTI-ACTION RAAG (ANGER) METER
+       ======================================================== */
+    .anger-widget {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 24px 18px;
+      border: 1.5px solid rgba(255, 204, 213, 0.95);
+      box-shadow: 0 16px 36px rgba(255, 42, 109, 0.16);
+      margin-bottom: 26px;
+      position: relative;
+    }
+    .anger-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .anger-title {
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .anger-score {
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #ffe3eb;
+      color: var(--primary-dark);
+      transition: all 0.3s ease;
+    }
+    .anger-bar-bg {
+      width: 100%;
+      height: 22px;
+      background: #f1f3f5;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.08);
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .anger-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ff0044, #ff5e00);
+      border-radius: 50px;
+      transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s;
+    }
+    .meter-message {
+      font-family: 'Caveat', cursive;
+      font-size: 1.35rem;
+      color: var(--primary);
+      min-height: 26px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    /* Playful Anger-Reducing Actions Grid */
+    .anger-actions-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .anger-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .punish-btn {
+      background: linear-gradient(135deg, #fff5f7, #ffffff);
+      border: 1.5px solid #ffccd8;
+      border-radius: 18px;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 42, 109, 0.08);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .punish-btn:active {
+      transform: scale(0.92) translateY(2px);
+      background: #ffe3eb;
+    }
+    .punish-icon { font-size: 1.6rem; }
+    .punish-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .punish-effect {
+      font-size: 0.68rem;
+      color: #059669;
+      font-weight: 800;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* Peace Treats */
+    .treats-widget {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 22px 16px;
+      box-shadow: 0 16px 34px rgba(255, 42, 109, 0.16);
+      border: 1.5px solid rgba(255, 204, 213, 0.9);
+      margin-bottom: 24px;
+    }
+    .treats-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px; }
+    .treats-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
+    .treats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .treat-btn {
+      background: #fff0f4;
+      border: 1.5px solid #ffccd9;
+      border-radius: 16px;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .treat-btn .t-icon { font-size: 1.6rem; }
+    .treat-btn .t-name { font-size: 0.78rem; font-weight: 700; color: var(--primary-dark); }
+    .treat-popup-msg { margin-top: 12px; font-family: 'Caveat', cursive; font-size: 1.3rem; color: var(--primary); min-height: 28px; }
+
+    /* Wax Letter */
+    .letter-stage { width: 100%; margin-bottom: 26px; perspective: 1000px; }
+    .envelope-3d {
+      background: var(--glass-panel);
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      padding: 24px 20px;
+      border: 2px dashed rgba(255, 42, 109, 0.45);
+      box-shadow: 0 20px 45px rgba(255, 42, 109, 0.2);
+      cursor: pointer;
+    }
+    .wax-seal-3d {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 10px;
+      background: radial-gradient(circle at 35% 35%, #ff3b68, #a80029 78%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffe875;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      border: 3px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 14px 26px rgba(168, 0, 41, 0.5);
+    }
+    .envelope-tag { font-size: 0.92rem; color: var(--primary-dark); font-weight: 700; }
+    .letter-parchment {
+      display: none;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 22px 18px;
+      margin-top: 16px;
+      text-align: left;
+      border: 1.5px solid rgba(255, 204, 213, 0.9);
+      animation: unfold3D 0.45s ease forwards;
+    }
+    @keyframes unfold3D { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .letter-greeting { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--primary-dark); margin-bottom: 8px; }
+    .letter-body { font-size: 0.9rem; line-height: 1.75; color: #451b2e; margin-bottom: 10px; }
+    .letter-signature { font-family: 'Caveat', cursive; font-size: 1.55rem; color: var(--primary); text-align: right; }
+
+    /* Promises */
+    .promises-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin-bottom: 26px; }
+    @media (max-width: 460px) { .promises-grid { grid-template-columns: 1fr; } }
+    .promise-card-3d {
+      background: var(--glass-panel);
+      backdrop-filter: blur(14px);
+      padding: 18px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--glass-border);
+      box-shadow: 0 12px 24px rgba(255, 42, 109, 0.12);
+    }
+    .promise-icon { font-size: 2rem; margin-bottom: 6px; }
+    .promise-card-3d h3 { font-size: 0.92rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px; }
+    .promise-card-3d p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+
+    /* Arena */
+    .arena-card-3d {
+      background: #ffffff;
+      border-radius: 30px;
+      padding: 32px 20px;
+      width: 100%;
+      box-shadow: 0 24px 50px rgba(255, 42, 109, 0.25);
+      border: 1.5px solid rgba(255, 204, 213, 0.9);
+      position: relative;
+    }
+    .arena-title { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--primary-dark); margin-bottom: 6px; }
+    .arena-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; }
+    .button-arena { display: flex; justify-content: center; align-items: center; gap: 16px; position: relative; min-height: 75px; }
+
+    .pushable-btn-yes {
+      background: linear-gradient(180deg, #ff4d79 0%, #e60045 100%);
+      color: #ffffff;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #9e002e, 0 16px 25px rgba(230, 0, 69, 0.45);
+      transition: all 0.15s ease;
+      z-index: 5;
+    }
+    .pushable-btn-yes:active { transform: translateY(6px); box-shadow: 0 0 0 #9e002e; }
+
+    .pushable-btn-no {
+      background: linear-gradient(180deg, #ffffff 0%, #eceff3 100%);
+      color: #555f6d;
+      border: 1px solid #d3d8df;
+      padding: 14px 22px;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #b0b7c1, 0 12px 18px rgba(0, 0, 0, 0.08);
+      position: relative;
+      transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      touch-action: manipulation;
+    }
+    .pushable-btn-no:active { transform: translateY(5px); }
+
+    /* Modals */
+    .custom-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(30, 8, 18, 0.72);
+      backdrop-filter: blur(14px);
       z-index: 999999;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
-    .modal-box {
+    .modal-card-3d {
       background: #ffffff;
       max-width: 400px;
       width: 100%;
-      border-radius: 24px;
-      padding: 30px 20px;
+      border-radius: 30px;
+      padding: 34px 22px;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      box-shadow: 0 35px 80px rgba(0,0,0,0.45);
+      animation: pop3D 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .modal-emoji {
-      font-size: 3rem;
-      margin-bottom: 10px;
+    @keyframes pop3D {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
-    .modal-box h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--primary-dark);
-      margin-bottom: 8px;
+    .modal-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+    .modal-card-3d h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--primary-dark); margin-bottom: 10px; }
+    .modal-card-3d p { font-size: 0.94rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 22px; }
+
+    .tap-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.8rem;
+      z-index: 99999;
+      animation: floatTap 1s ease-out forwards;
     }
-    .modal-box p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 18px;
-    }
-    .close-modal-btn {
-      background: linear-gradient(135deg, #ff477e, #ff0a54);
-      color: #fff;
-      border: none;
-      padding: 12px 26px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
+    @keyframes floatTap {
+      0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+      100% { transform: translate(-50%, -120px) scale(1.4); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Audio Element -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+  <div class="glow-orb glow-orb-3"></div>
+
+  <canvas id="ambient-canvas"></canvas>
+
   <audio id="bg-music" loop playsinline preload="auto">
     <source src="https://files.catbox.moe/2wjewq.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Top Controller Widget -->
-  <div class="music-widget" id="musicWidget">
+  <div class="music-dock" id="musicWidget">
     <span id="musicIcon">🎵</span>
-    <span class="music-title" id="musicTitle">Play Music</span>
-    <div class="sound-bars" id="soundBars">
+    <span class="music-label" id="musicTitle">Play Music</span>
+    <div class="equalizer-bars" id="soundBars">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </div>
   </div>
 
-  <div class="container">
-    <div class="badge">A Message Straight From My Heart</div>
-    <h1 class="title">I'm Truly Sorry, <span>Shinthiya</span></h1>
-    <p class="subheading">
+  <div class="viewport-container">
+
+    <div class="pill-badge">
+      <span>✨</span>
+      <span>A Message Straight From My Heart</span>
+      <span>✨</span>
+    </div>
+
+    <h1 class="hero-title">I'm Truly Sorry, <span>Shinthiya</span></h1>
+    <p class="hero-sub">
       Seeing you upset because of me hurts worse than anything. I want to make things right.
     </p>
 
-    <!-- Photo Card -->
-    <div class="photo-card">
-      <div class="photo-wrapper">
-        <img src="https://files.catbox.moe/nnxb4h.jpg" alt="Grabbing my ear to say sorry" />
-        <span class="photo-badge">कान पकड़ कर सॉरी 🥺</span>
-      </div>
-      <div class="photo-caption">
-        "Yes, this is me... holding my ear and truly admitting I was wrong. Please forgive me, Shinthiya."
+    <!-- 3D Polaroid -->
+    <div class="tilt-stage" id="photoScene">
+      <div class="polaroid-3d" id="photoCard">
+        <div class="photo-viewport">
+          <img src="https://files.catbox.moe/nnxb4h.jpg" alt="Holding my ear to say sorry" />
+          <div class="ear-badge-3d">Kaan dhore sorry bolchhi 🥺</div>
+        </div>
+        <div class="photo-handwritten">
+          "Yes, this is me... holding my ear and truly admitting I was wrong. Please forgive me, Shinthiya."
+        </div>
       </div>
     </div>
 
-    <!-- Letter Section -->
-    <div class="letter-section">
-      <div class="envelope-box" id="envelopeBox">
-        <div class="wax-seal">S</div>
-        <div class="envelope-hint" id="envelopeHint">✉️ Tap here to open my personal letter for you</div>
+    <!-- ==============================================
+         NEW: SUPER PLAYFUL MULTI-ACTION ANGER METER
+         ============================================== -->
+    <div class="anger-widget">
+      <div class="anger-header">
+        <div class="anger-title">
+          <span>Shinthiya's Raag Meter</span>
+          <span id="angerMoodEmoji">😡🔥</span>
+        </div>
+        <div class="anger-score" id="angerText">100% Mad</div>
+      </div>
+
+      <div class="anger-bar-bg">
+        <div class="anger-bar-fill" id="angerFill"></div>
+      </div>
+
+      <div class="meter-message" id="meterMsg">"Very angry right now! Choose a punishment below to cool down:"</div>
+
+      <div class="anger-actions-title">👇 Punish me to lower anger:</div>
+      <div class="anger-actions-grid">
+        <div class="punish-btn" onclick="executeAngerDrop(15, '🤏 Ouch! You pulled my cheeks hard... but you got a cute smile now!', '😤')">
+          <span class="punish-icon">🤏</span>
+          <span class="punish-name">Pull My Cheeks</span>
+          <span class="punish-effect">-15% Anger</span>
+        </div>
+
+        <div class="punish-btn" onclick="executeAngerDrop(25, '🥺 Uthak-baithak shuru! 10 sit-ups done holding my ears! 🥲', '🥺')">
+          <span class="punish-icon">🏋️‍♂️</span>
+          <span class="punish-name">10 Sit-Ups</span>
+          <span class="punish-effect">-25% Anger</span>
+        </div>
+
+        <div class="punish-btn" onclick="executeAngerDrop(20, '🥒 Eating bitter gourd (karela) without water as punishment! 😭', '😣')">
+          <span class="punish-icon">🥒</span>
+          <span class="punish-name">Feed Me Karela</span>
+          <span class="punish-effect">-20% Anger</span>
+        </div>
+
+        <div class="punish-btn" onclick="executeAngerDrop(20, '🧁 Sweet strawberry cupcake delivered straight to your mood! 😋', '🥰')">
+          <span class="punish-icon">🧁</span>
+          <span class="punish-name">Peace Cupcake</span>
+          <span class="punish-effect">-20% Anger</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 HEART BALLOONS STAGE -->
+    <div class="balloon-game-box">
+      <span class="game-badge">🎯 Mini Love Mission</span>
+      <h2 class="game-title">Blast The Heart Balloons!</h2>
+      <p class="game-desc">There are 4 hidden compliments for you inside. Tap a balloon to pop it with Cupid's bow & arrow! 🏹</p>
+
+      <div class="balloons-arena" id="balloonArena">
+        <div class="balloon-item b-1" id="b1" onclick="popBalloon(1, event)">
+          <div class="balloon-heart"></div>
+          <div class="balloon-string"></div>
+          <span class="balloon-label">#1 Heart</span>
+        </div>
+
+        <div class="balloon-item b-2" id="b2" onclick="popBalloon(2, event)">
+          <div class="balloon-heart"></div>
+          <div class="balloon-string"></div>
+          <span class="balloon-label">#2 Heart</span>
+        </div>
+
+        <div class="balloon-item b-3" id="b3" onclick="popBalloon(3, event)">
+          <div class="balloon-heart"></div>
+          <div class="balloon-string"></div>
+          <span class="balloon-label">#3 Heart</span>
+        </div>
+
+        <div class="balloon-item b-4" id="b4" onclick="popBalloon(4, event)">
+          <div class="balloon-heart"></div>
+          <div class="balloon-string"></div>
+          <span class="balloon-label">#4 Heart</span>
+        </div>
+      </div>
+
+      <div class="bow-container">
+        <span>🏹 Cupid's Bow Ready</span>
+        <span>•</span>
+        <span id="balloonStatus">4 Balloons Left</span>
+      </div>
+    </div>
+
+    <!-- Peace Treats -->
+    <div class="treats-widget">
+      <div class="treats-title">Cute Peace Offerings for You 🎁</div>
+      <div class="treats-sub">Tap whichever you need right now to calm down:</div>
+      <div class="treats-grid">
+        <div class="treat-btn" onclick="giveTreat('💆‍♀️ Gentle virtual headpat delivered! Take a deep breath ❤️')">
+          <span class="t-icon">💆‍♀️</span>
+          <span class="t-name">Headpats</span>
+        </div>
+        <div class="treat-btn" onclick="giveTreat('🍫 Infinite favorite chocolates arriving at your door! 😋')">
+          <span class="t-icon">🍫</span>
+          <span class="t-name">Chocolates</span>
+        </div>
+        <div class="treat-btn" onclick="giveTreat('✨ Reminder: You are the prettiest girl in the world! 🥰')">
+          <span class="t-icon">✨</span>
+          <span class="t-name">Compliments</span>
+        </div>
+        <div class="treat-btn" onclick="giveTreat('🫂 One unbreakable warm hug whenever you want it! 🤗')">
+          <span class="t-icon">🫂</span>
+          <span class="t-name">Tight Hug</span>
+        </div>
+      </div>
+      <div class="treat-popup-msg" id="treatMsg"></div>
+    </div>
+
+    <!-- Wax Letter -->
+    <div class="letter-stage">
+      <div class="envelope-3d" id="envelopeBox">
+        <div class="wax-seal-3d">S</div>
+        <div class="envelope-tag" id="envelopeHint">✉️ Tap here to open my personal letter for you</div>
         
-        <div class="letter-content" id="letterContent">
+        <div class="letter-parchment" id="letterContent">
           <div class="letter-greeting">Dearest Shinthiya,</div>
-          <p class="letter-text">
+          <p class="letter-body">
             I know I made a mistake, lost my patience, or said the wrong words—and because of that, you got hurt. Knowing that I caused tears or anger in your eyes breaks my heart completely.
           </p>
-          <p class="letter-text">
+          <p class="letter-body">
             You mean the absolute world to me. Your happiness, your soft smile, and the peace of your mind are more important to me than my ego or being right. I never want to be the reason behind your sadness.
           </p>
-          <p class="letter-text">
+          <p class="letter-body">
             I am truly, deeply sorry from the bottom of my heart. Please take your time, but know that I am right here waiting to listen and make it up to you.
           </p>
-          <div class="letter-sign">Forever Yours ❤️</div>
+          <div class="letter-signature">Forever Yours ❤️</div>
         </div>
       </div>
     </div>
 
     <!-- Promises -->
-    <div class="cards-grid">
-      <div class="mini-card">
-        <div class="icon">👂</div>
+    <div class="promises-grid">
+      <div class="promise-card-3d">
+        <div class="promise-icon">👂</div>
         <h3>Listen First Always</h3>
         <p>I promise to listen to your feelings first, without arguing or defending myself.</p>
       </div>
-      <div class="mini-card">
-        <div class="icon">🍦</div>
+      <div class="promise-card-3d">
+        <div class="promise-icon">🍦</div>
         <h3>Your Favorite Treats</h3>
         <p>Unlimited comfort food, sweets, and your favorite snacks whenever you need a boost.</p>
       </div>
-      <div class="mini-card">
-        <div class="icon">🫂</div>
+      <div class="promise-card-3d">
+        <div class="promise-icon">🫂</div>
         <h3>Never Sleep Angry</h3>
         <p>No matter how hard the day was, we talk it out and sleep with love in our hearts.</p>
       </div>
-      <div class="mini-card">
-        <div class="icon">✨</div>
+      <div class="promise-card-3d">
+        <div class="promise-icon">✨</div>
         <h3>Cherish You Better</h3>
         <p>Never taking your presence or kindness for granted, today and every single day.</p>
       </div>
     </div>
 
-    <!-- Runaway Arena -->
-    <div class="decision-area">
-      <h2 class="decision-title">Will You Forgive Me, Shinthiya?</h2>
-      <p class="decision-sub">Even if you are still a tiny bit mad... do I get one more hug? 🥺</p>
+    <!-- Forgiveness Arena -->
+    <div class="arena-card-3d">
+      <h2 class="arena-title">Will You Forgive Me, Shinthiya?</h2>
+      <p class="arena-sub">Even if you are still a tiny bit mad... do I get one more hug? 🥺</p>
       
-      <div class="btn-wrap">
-        <button class="btn-yes" id="btnYes">Yes, I Forgive You ❤️</button>
-        <button class="btn-no" id="btnNo">No, Still Mad 😤</button>
+      <div class="button-arena">
+        <button class="pushable-btn-yes" id="btnYes">Yes, I Forgive You ❤️</button>
+        <button class="pushable-btn-no" id="btnNo">No, Still Mad 😤</button>
       </div>
+    </div>
+
+  </div>
+
+  <!-- Compliment Balloon Pop Modal -->
+  <div class="custom-modal" id="complimentModal">
+    <div class="modal-card-3d">
+      <div class="modal-emoji" id="popEmoji">🎈💥</div>
+      <h2 id="popTitle">Balloon Popped!</h2>
+      <p id="popText">Compliment message</p>
+      <button class="pushable-btn-yes" onclick="closeComplimentModal()">Keep Smiling 🥰</button>
     </div>
   </div>
 
-  <!-- Success Modal -->
-  <div class="success-modal" id="successModal">
-    <div class="modal-box">
+  <!-- Final Modal -->
+  <div class="custom-modal" id="successModal">
+    <div class="modal-card-3d">
       <div class="modal-emoji">💖🥰✨</div>
       <h2>Thank You, Shinthiya!</h2>
       <p>
         Your forgiveness is the most precious gift. I promise to treasure your heart and treat you with all the love and gentleness you deserve!
       </p>
-      <button class="close-modal-btn" id="closeModalBtn">Big Hug Accepted 🤗</button>
+      <button class="pushable-btn-yes" id="closeModalBtn">Big Hug Accepted 🤗</button>
     </div>
   </div>
 
   <script>
+    /* GLOBAL AUDIO PLAYBACK */
     const music = document.getElementById('bg-music');
     const musicTitle = document.getElementById('musicTitle');
     const musicIcon = document.getElementById('musicIcon');
@@ -479,6 +853,7 @@
     let isPlaying = false;
 
     function playAudio() {
+      if (isPlaying) return;
       music.volume = 0.6;
       music.play().then(() => {
         isPlaying = true;
@@ -486,7 +861,7 @@
         musicTitle.textContent = 'Playing';
         soundBars.classList.add('playing');
       }).catch(err => {
-        console.warn("Audio tap required:", err);
+        console.warn("Audio waiting:", err);
       });
     }
 
@@ -505,13 +880,188 @@
 
     musicWidget.addEventListener('click', toggleMusic);
 
-    // Letter Toggle
+    ['click', 'touchstart', 'pointerdown'].forEach(evt => {
+      window.addEventListener(evt, () => {
+        if (!isPlaying) playAudio();
+      }, { passive: true });
+    });
+
+    /* Tap Heart Burst Effect */
+    window.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON') {
+        const heart = document.createElement('div');
+        heart.className = 'tap-heart';
+        heart.textContent = ['💖', '🌸', '✨', '🥺', '💕'][Math.floor(Math.random() * 5)];
+        heart.style.left = e.clientX + 'px';
+        heart.style.top = e.clientY + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1000);
+      }
+    });
+
+    /* ========================================================
+       NEW SUPER PLAYFUL ANGER METER LOGIC
+       ======================================================== */
+    let currentAnger = 100;
+
+    function executeAngerDrop(amount, funnyText, moodEmoji) {
+      currentAnger = Math.max(0, currentAnger - amount);
+      const fill = document.getElementById('angerFill');
+      const text = document.getElementById('angerText');
+      const mood = document.getElementById('angerMoodEmoji');
+      const msg = document.getElementById('meterMsg');
+
+      fill.style.width = currentAnger + '%';
+      text.textContent = currentAnger + '% Mad';
+      msg.textContent = funnyText;
+      mood.textContent = moodEmoji;
+
+      // Color Shift based on anger state
+      if (currentAnger > 65) {
+        fill.style.background = 'linear-gradient(90deg, #ff0044, #ff5e00)';
+      } else if (currentAnger > 30) {
+        fill.style.background = 'linear-gradient(90deg, #ff9e00, #ffd000)';
+        mood.textContent = '🥺';
+      } else if (currentAnger > 0) {
+        fill.style.background = 'linear-gradient(90deg, #70e000, #38b000)';
+        mood.textContent = '😊';
+      } else {
+        fill.style.background = 'linear-gradient(90deg, #06d6a0, #118ab2)';
+        mood.textContent = '🥰';
+        text.textContent = '0% Mad (100% Love ❤️)';
+        msg.textContent = '🎉 All anger melted! Only unconditional hugs left! 🤗';
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 70, spread: 70 });
+        }
+      }
+
+      // Playful wiggle on photo
+      const card = document.getElementById('photoCard');
+      card.style.transform = 'rotateX(8deg) rotateY(-8deg) scale(0.96)';
+      setTimeout(() => {
+        card.style.transform = 'rotateX(4deg) rotateY(0deg) translateZ(10px)';
+      }, 300);
+    }
+
+    /* BALLOONS LOGIC */
+    const compliments = {
+      1: {
+        title: "Balloon #1 Compliment 💖",
+        text: "Your smile is genuinely my favorite thing in the universe. When you smile at me, all my stress completely vanishes!",
+        emoji: "😍✨"
+      },
+      2: {
+        title: "Balloon #2 Compliment 🌸",
+        text: "You have the kindest, softest heart, Shinthiya. Even when you are upset, you still care so deeply—and I love that about you.",
+        emoji: "🥺❤️"
+      },
+      3: {
+        title: "Balloon #3 Compliment 👑",
+        text: "You are effortlessly beautiful inside and out. No matter what, you will always be the most stunning person in my eyes.",
+        emoji: "🥰✨"
+      },
+      4: {
+        title: "Balloon #4 Compliment 🌟",
+        text: "Being with you makes me want to be the best version of myself. I am so lucky to have you in my life, and I'll never let you go.",
+        emoji: "🫂💍"
+      }
+    };
+
+    let poppedCount = 0;
+    const poppedBalloons = {};
+
+    function popBalloon(id, event) {
+      if (poppedBalloons[id]) return;
+      poppedBalloons[id] = true;
+      poppedCount++;
+
+      const balloonElem = document.getElementById('b' + id);
+      const rect = balloonElem.getBoundingClientRect();
+      const targetX = rect.left + rect.width / 2;
+      const targetY = rect.top + rect.height / 2;
+
+      const arrow = document.createElement('div');
+      arrow.className = 'flying-arrow';
+      arrow.textContent = '🏹';
+      arrow.style.left = (window.innerWidth / 2) + 'px';
+      arrow.style.top = (window.innerHeight - 80) + 'px';
+      document.body.appendChild(arrow);
+
+      setTimeout(() => {
+        arrow.style.left = targetX + 'px';
+        arrow.style.top = targetY + 'px';
+      }, 20);
+
+      setTimeout(() => {
+        arrow.remove();
+        balloonElem.style.transition = 'transform 0.2s, opacity 0.2s';
+        balloonElem.style.transform = 'scale(1.4)';
+        balloonElem.style.opacity = '0';
+
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { x: targetX / window.innerWidth, y: targetY / window.innerHeight }
+          });
+        }
+
+        setTimeout(() => {
+          balloonElem.style.display = 'none';
+          showComplimentModal(id);
+          executeAngerDrop(15, '🎈 Balloon popped! Compliment delivered straight to your heart!', '🥰');
+        }, 220);
+
+        const remaining = 4 - poppedCount;
+        document.getElementById('balloonStatus').textContent = remaining > 0 ? `${remaining} Balloons Left` : 'All Compliments Unlocked! 🎉';
+      }, 370);
+    }
+
+    function showComplimentModal(id) {
+      const data = compliments[id];
+      document.getElementById('popEmoji').textContent = data.emoji;
+      document.getElementById('popTitle').textContent = data.title;
+      document.getElementById('popText').textContent = data.text;
+      document.getElementById('complimentModal').style.display = 'flex';
+    }
+
+    function closeComplimentModal() {
+      document.getElementById('complimentModal').style.display = 'none';
+    }
+
+    /* Peace Treats */
+    function giveTreat(msg) {
+      document.getElementById('treatMsg').textContent = msg;
+      executeAngerDrop(15, msg, '😋');
+    }
+
+    /* 3D Tilt */
+    const scene = document.getElementById('photoScene');
+    const card = document.getElementById('photoCard');
+
+    function handle3DTilt(x, y) {
+      const rect = scene.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const rotateX = ((y - centerY) / (rect.height / 2)) * -14;
+      const rotateY = ((x - centerX) / (rect.width / 2)) * 14;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px)`;
+    }
+
+    window.addEventListener('mousemove', (e) => handle3DTilt(e.clientX, e.clientY));
+    scene.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) handle3DTilt(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+    scene.addEventListener('touchend', () => {
+      card.style.transform = 'rotateX(4deg) rotateY(0deg) translateZ(10px)';
+    });
+
+    /* Accordion Letter */
     const envelopeBox = document.getElementById('envelopeBox');
     const letterContent = document.getElementById('letterContent');
     const envelopeHint = document.getElementById('envelopeHint');
 
     envelopeBox.addEventListener('click', function() {
-      if (!isPlaying) playAudio();
       if (letterContent.style.display !== 'block') {
         letterContent.style.display = 'block';
         envelopeHint.textContent = '💌 Written with all my sincerity:';
@@ -521,27 +1071,27 @@
       }
     });
 
-    // Dodge Button
+    /* 3D Dodge Runaway Button */
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     let dodgeCount = 0;
     const dodgePhrases = [
       "Are you sure? 🥺",
-      "Look at my photo! 🥲",
-      "I brought snacks! 🍫",
-      "One hug please? 🥺",
+      "Look at my photo holding ear! 🥲",
+      "Drop my anger meter first! 📉",
+      "Pull my cheeks instead! 🤏",
       "Can't catch me! 🏃💨",
       "Just say Yes ❤️"
     ];
 
     function handleDodge(e) {
       if (e) e.preventDefault();
-      if (!isPlaying) playAudio();
       const randomX = (Math.random() - 0.5) * 180;
-      const randomY = (Math.random() - 0.5) * 100;
-      btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      const randomY = (Math.random() - 0.5) * 110;
+      btnNo.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.95)`;
       btnNo.textContent = dodgePhrases[dodgeCount % dodgePhrases.length];
       dodgeCount++;
+
       const currentScale = 1 + (dodgeCount * 0.08);
       btnYes.style.transform = `scale(${Math.min(currentScale, 1.35)})`;
     }
@@ -549,24 +1099,64 @@
     btnNo.addEventListener('touchstart', handleDodge, { passive: false });
     btnNo.addEventListener('click', handleDodge);
 
-    // Yes Button
+    /* Yes Button */
     btnYes.addEventListener('click', function() {
-      if (!isPlaying) playAudio();
       document.getElementById('successModal').style.display = 'flex';
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        confetti({ particleCount: 140, spread: 85, origin: { y: 0.6 } });
+        setTimeout(() => {
+          confetti({ particleCount: 90, angle: 60, spread: 60, origin: { x: 0 } });
+          confetti({ particleCount: 90, angle: 120, spread: 60, origin: { x: 1 } });
+        }, 260);
       }
     });
 
-    // Modal Close
     document.getElementById('closeModalBtn').addEventListener('click', function() {
       document.getElementById('successModal').style.display = 'none';
     });
 
-    // Tap anywhere on document once to begin music
-    document.body.addEventListener('touchstart', function() {
-      if (!isPlaying) playAudio();
-    }, { once: true });
+    /* Particle Canvas */
+    const canvas = document.getElementById('ambient-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const items = [];
+    const symbols = ['❤️', '🌸', '✨', '💖', '💫'];
+
+    for (let i = 0; i < 20; i++) {
+      items.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        symbol: symbols[Math.floor(Math.random() * symbols.length)],
+        size: Math.random() * 12 + 12,
+        speedY: Math.random() * 0.8 + 0.3,
+        speedX: Math.random() * 0.6 - 0.3,
+        opacity: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    function renderParticles() {
+      ctx.clearRect(0, 0, width, height);
+      items.forEach(it => {
+        it.y -= it.speedY;
+        it.x += it.speedX;
+        if (it.y < -30) {
+          it.y = height + 20;
+          it.x = Math.random() * width;
+        }
+        ctx.globalAlpha = it.opacity;
+        ctx.font = `${it.size}px sans-serif`;
+        ctx.fillText(it.symbol, it.x, it.y);
+      });
+      requestAnimationFrame(renderParticles);
+    }
+    renderParticles();
   </script>
 </body>
 </html>
