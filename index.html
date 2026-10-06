@@ -13,7 +13,7 @@
       --primary: #ff2a6d;
       --primary-dark: #b3003b;
       --primary-glow: rgba(255, 42, 109, 0.45);
-      --glass-panel: rgba(255, 255, 255, 0.82);
+      --glass-panel: rgba(255, 255, 255, 0.85);
       --glass-border: rgba(255, 255, 255, 0.95);
       --text-main: #2b0b1a;
       --text-muted: #6b3d54;
@@ -32,13 +32,7 @@
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
-      perspective: 1200px;
       position: relative;
-    }
-
-    body.modal-open {
-      overflow: hidden !important;
-      touch-action: none;
     }
 
     #ambient-canvas {
@@ -48,173 +42,233 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 2;
+      z-index: 1;
     }
 
     .glow-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(65px);
+      filter: blur(60px);
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.55;
-      animation: orbFloat 10s infinite alternate ease-in-out;
+      z-index: 0;
+      opacity: 0.5;
     }
-    .glow-orb-1 { width: 320px; height: 320px; background: #ff5277; top: -80px; left: -90px; }
-    .glow-orb-2 { width: 350px; height: 350px; background: #ff2a6d; bottom: 5%; right: -100px; animation-duration: 14s; }
-    .glow-orb-3 { width: 220px; height: 220px; background: #ffccd9; top: 45%; left: -50px; animation-duration: 8s; }
-    @keyframes orbFloat {
-      0% { transform: translateY(0px) rotate(0deg) scale(1); }
-      100% { transform: translateY(45px) rotate(15deg) scale(1.12); }
-    }
+    .glow-orb-1 { width: 300px; height: 300px; background: #ff5277; top: -80px; left: -90px; }
+    .glow-orb-2 { width: 320px; height: 320px; background: #ff2a6d; bottom: 5%; right: -100px; }
 
+    /* Top Floating Music Controller */
     .music-dock {
       position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 99999;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      top: 14px;
+      right: 14px;
+      z-index: 9999;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
       border: 2px solid var(--glass-border);
-      padding: 9px 18px;
+      padding: 8px 16px;
       border-radius: 50px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 12px 28px var(--primary-glow), inset 0 2px 3px rgba(255, 255, 255, 0.9);
+      gap: 8px;
+      box-shadow: 0 10px 24px var(--primary-glow);
       cursor: pointer;
-      user-select: none;
     }
-    .music-dock:active { transform: scale(0.92); }
-    .music-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.8px; }
-    .equalizer-bars { display: flex; align-items: flex-end; gap: 3px; height: 15px; }
+    .music-dock:active { transform: scale(0.95); }
+    .music-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; }
+    .equalizer-bars { display: flex; align-items: flex-end; gap: 3px; height: 14px; }
     .equalizer-bars .bar { width: 3px; height: 4px; background: var(--primary); border-radius: 3px; }
     .equalizer-bars.playing .bar:nth-child(1) { animation: soundEq 0.7s infinite alternate ease-in-out; }
     .equalizer-bars.playing .bar:nth-child(2) { animation: soundEq 0.5s infinite alternate 0.15s ease-in-out; }
     .equalizer-bars.playing .bar:nth-child(3) { animation: soundEq 0.9s infinite alternate 0.35s ease-in-out; }
-    @keyframes soundEq { 0% { height: 3px; } 100% { height: 15px; } }
+    @keyframes soundEq { 0% { height: 3px; } 100% { height: 14px; } }
 
     .viewport-container {
       position: relative;
       z-index: 10;
       max-width: 520px;
       margin: 0 auto;
-      padding: 68px 18px 90px;
+      padding: 64px 16px 90px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transform-style: preserve-3d;
     }
 
     .pill-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(12px);
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
       color: var(--primary-dark);
-      padding: 8px 22px;
+      padding: 7px 20px;
       border-radius: 50px;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 14px;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
       border: 1.5px solid var(--glass-border);
-      box-shadow: 0 10px 22px rgba(255, 42, 109, 0.15), inset 0 2px 2px #fff;
+      box-shadow: 0 8px 18px rgba(255, 42, 109, 0.15);
     }
 
     h1.hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       color: var(--primary-dark);
       line-height: 1.25;
       margin-bottom: 8px;
-      text-shadow: 0 4px 15px rgba(179, 0, 59, 0.18);
     }
     h1.hero-title span {
       font-family: 'Great Vibes', cursive;
-      font-size: 3.5rem;
+      font-size: 3.3rem;
       color: var(--primary);
       display: inline-block;
-      filter: drop-shadow(0 6px 10px rgba(255, 42, 109, 0.35));
     }
 
     .hero-sub {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 24px;
-      line-height: 1.6;
+      margin-bottom: 22px;
+      line-height: 1.55;
     }
 
+    /* 3D Polaroid Photo Frame */
     .tilt-stage {
-      perspective: 1000px;
       margin-bottom: 24px;
       width: 100%;
-      max-width: 320px;
+      max-width: 310px;
     }
     .polaroid-3d {
       background: #ffffff;
-      padding: 14px 14px 22px;
-      border-radius: 26px;
-      box-shadow: 
-        0 30px 60px -12px rgba(255, 42, 109, 0.42),
-        0 16px 28px -8px rgba(0, 0, 0, 0.12),
-        inset 0 0 0 1.5px rgba(255, 255, 255, 0.95);
-      transform: rotateY(0deg) rotateX(4deg) translateZ(10px);
-      transition: transform 0.18s ease-out;
-      transform-style: preserve-3d;
+      padding: 12px 12px 20px;
+      border-radius: 24px;
+      box-shadow: 0 24px 50px -10px rgba(255, 42, 109, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       position: relative;
     }
     .photo-viewport {
       position: relative;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
       width: 100%;
-      height: 330px;
+      height: 320px;
       background: #ffeef2;
-      box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.08);
-      transform: translateZ(18px);
     }
     .photo-viewport img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .ear-badge-3d {
       position: absolute;
       bottom: 12px;
       left: 50%;
-      transform: translateX(-50%) translateZ(30px);
-      background: rgba(18, 2, 8, 0.82);
-      backdrop-filter: blur(8px);
+      transform: translateX(-50%);
+      background: rgba(18, 2, 8, 0.85);
       color: #fff;
       font-size: 0.8rem;
       font-weight: 600;
       padding: 6px 18px;
       border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.35);
       white-space: nowrap;
     }
     .photo-handwritten {
-      margin-top: 14px;
+      margin-top: 12px;
       font-family: 'Caveat', cursive;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       color: var(--primary-dark);
-      transform: translateZ(14px);
-      line-height: 1.35;
+      line-height: 1.3;
     }
 
-    /* 4 HEART BALLOONS STAGE */
+    /* RAAG (ANGER) METER */
+    .anger-widget {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 22px 16px;
+      border: 1.5px solid rgba(255, 204, 213, 0.95);
+      box-shadow: 0 16px 36px rgba(255, 42, 109, 0.14);
+      margin-bottom: 24px;
+    }
+    .anger-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .anger-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .anger-score {
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #ffe3eb;
+      color: var(--primary-dark);
+    }
+    .anger-bar-bg {
+      width: 100%;
+      height: 20px;
+      background: #f1f3f5;
+      border-radius: 50px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .anger-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ff0044, #ff5e00);
+      border-radius: 50px;
+      transition: width 0.35s ease, background 0.3s;
+    }
+    .meter-message {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: var(--primary);
+      min-height: 24px;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    .anger-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .punish-btn {
+      background: #fff8fa;
+      border: 1.5px solid #ffccd8;
+      border-radius: 16px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .punish-btn:active { transform: scale(0.95); background: #ffe3eb; }
+    .punish-icon { font-size: 1.5rem; }
+    .punish-name { font-size: 0.78rem; font-weight: 700; color: var(--primary-dark); }
+    .punish-effect {
+      font-size: 0.65rem;
+      color: #059669;
+      font-weight: 800;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* 4 LOVE BALLOONS STAGE */
     .balloon-game-box {
       width: 100%;
       background: #ffffff;
-      border-radius: 28px;
-      padding: 24px 16px;
-      box-shadow: 0 20px 45px rgba(255, 42, 109, 0.18);
+      border-radius: 26px;
+      padding: 22px 14px;
+      box-shadow: 0 18px 40px rgba(255, 42, 109, 0.16);
       border: 1.5px solid rgba(255, 204, 213, 0.9);
       margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
     }
     .game-badge {
       display: inline-block;
@@ -237,74 +291,53 @@
     .game-desc {
       font-size: 0.82rem;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
-
     .balloons-arena {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      padding: 10px 0 20px;
-      position: relative;
+      gap: 8px;
+      padding: 8px 0;
     }
     .balloon-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      position: relative;
-      transition: transform 0.2s;
+      touch-action: manipulation;
     }
     .balloon-item:active { transform: scale(0.92); }
-    .balloon-heart {
-      width: 62px;
-      height: 58px;
-      position: relative;
-      background: radial-gradient(circle at 35% 35%, #ff6b8b, #ff0f50 70%);
-      transform: rotate(-45deg);
-      border-radius: 50% 50% 0 0;
-      box-shadow: 0 10px 20px rgba(255, 15, 80, 0.35), inset 0 2px 5px rgba(255,255,255,0.6);
-      animation: floatBalloon 3s ease-in-out infinite alternate;
+    .love-balloon-svg {
+      width: 64px;
+      height: 68px;
+      filter: drop-shadow(0 8px 12px rgba(255, 42, 109, 0.3));
+      animation: floatHeart 2.5s ease-in-out infinite alternate;
     }
-    .balloon-heart::before {
-      content: '';
-      width: 62px;
-      height: 58px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: inherit;
-      border-radius: 50% 50% 0 0;
-      transform: rotate(90deg);
-      transform-origin: 50% 50%;
-      box-shadow: inherit;
-    }
-    .balloon-string {
+    .balloon-string-line {
       width: 2px;
-      height: 25px;
-      background: rgba(255, 42, 109, 0.4);
-      margin-top: 18px;
+      height: 20px;
+      background: rgba(255, 42, 109, 0.5);
+      margin-top: -2px;
       border-radius: 2px;
     }
     .balloon-label {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--primary-dark);
       margin-top: 4px;
     }
+    .b-1 .love-balloon-svg { animation-delay: 0s; }
+    .b-2 .love-balloon-svg { animation-delay: 0.6s; }
+    .b-3 .love-balloon-svg { animation-delay: 1.2s; }
+    .b-4 .love-balloon-svg { animation-delay: 1.8s; }
 
-    .b-1 .balloon-heart { animation-delay: 0s; }
-    .b-2 .balloon-heart { animation-delay: 0.6s; background: radial-gradient(circle at 35% 35%, #ff8da6, #ff2a6d 70%); }
-    .b-3 .balloon-heart { animation-delay: 1.2s; background: radial-gradient(circle at 35% 35%, #ff6b8b, #e0004d 70%); }
-    .b-4 .balloon-heart { animation-delay: 1.8s; background: radial-gradient(circle at 35% 35%, #ffa6b9, #ff1a60 70%); }
-
-    @keyframes floatBalloon {
-      0% { transform: translateY(0px) rotate(-45deg); }
-      100% { transform: translateY(-12px) rotate(-42deg); }
+    @keyframes floatHeart {
+      0% { transform: translateY(0px) rotate(-3deg); }
+      100% { transform: translateY(-10px) rotate(3deg); }
     }
 
     .bow-container {
-      margin-top: 10px;
+      margin-top: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -313,123 +346,9 @@
       font-weight: 600;
       color: var(--primary);
       background: #fff0f5;
-      padding: 8px 16px;
+      padding: 8px 14px;
       border-radius: 30px;
       border: 1px dashed var(--primary);
-    }
-
-    .flying-arrow {
-      position: fixed;
-      font-size: 2.2rem;
-      pointer-events: none;
-      z-index: 999999;
-      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-
-    /* RAAG (ANGER) METER */
-    .anger-widget {
-      width: 100%;
-      background: #ffffff;
-      border-radius: 28px;
-      padding: 24px 18px;
-      border: 1.5px solid rgba(255, 204, 213, 0.95);
-      box-shadow: 0 16px 36px rgba(255, 42, 109, 0.16);
-      margin-bottom: 26px;
-      position: relative;
-    }
-    .anger-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .anger-title {
-      font-weight: 800;
-      font-size: 1rem;
-      color: var(--primary-dark);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .anger-score {
-      font-weight: 800;
-      font-size: 0.95rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: #ffe3eb;
-      color: var(--primary-dark);
-      transition: all 0.3s ease;
-    }
-    .anger-bar-bg {
-      width: 100%;
-      height: 22px;
-      background: #f1f3f5;
-      border-radius: 50px;
-      overflow: hidden;
-      box-shadow: inset 0 3px 6px rgba(0,0,0,0.08);
-      position: relative;
-      margin-bottom: 14px;
-    }
-    .anger-bar-fill {
-      height: 100%;
-      width: 100%;
-      background: linear-gradient(90deg, #ff0044, #ff5e00);
-      border-radius: 50px;
-      transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s;
-    }
-    .meter-message {
-      font-family: 'Caveat', cursive;
-      font-size: 1.35rem;
-      color: var(--primary);
-      min-height: 26px;
-      margin-bottom: 16px;
-      font-weight: 700;
-    }
-
-    .anger-actions-title {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-    .anger-actions-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .punish-btn {
-      background: linear-gradient(135deg, #fff5f7, #ffffff);
-      border: 1.5px solid #ffccd8;
-      border-radius: 18px;
-      padding: 12px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 42, 109, 0.08);
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .punish-btn:active {
-      transform: scale(0.92) translateY(2px);
-      background: #ffe3eb;
-    }
-    .punish-icon { font-size: 1.6rem; }
-    .punish-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
-    .punish-effect {
-      font-size: 0.68rem;
-      color: #059669;
-      font-weight: 800;
-      background: rgba(16, 185, 129, 0.12);
-      padding: 2px 8px;
-      border-radius: 10px;
     }
 
     /* Peace Treats */
@@ -437,43 +356,45 @@
       width: 100%;
       background: #ffffff;
       border-radius: 26px;
-      padding: 22px 16px;
-      box-shadow: 0 16px 34px rgba(255, 42, 109, 0.16);
+      padding: 22px 14px;
+      box-shadow: 0 16px 34px rgba(255, 42, 109, 0.14);
       border: 1.5px solid rgba(255, 204, 213, 0.9);
       margin-bottom: 24px;
     }
-    .treats-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px; }
-    .treats-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
+    .treats-title { font-size: 1.05rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px; }
+    .treats-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
     .treats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .treat-btn {
       background: #fff0f4;
       border: 1.5px solid #ffccd9;
       border-radius: 16px;
-      padding: 12px 10px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
       cursor: pointer;
+      touch-action: manipulation;
     }
-    .treat-btn .t-icon { font-size: 1.6rem; }
+    .treat-btn .t-icon { font-size: 1.5rem; }
     .treat-btn .t-name { font-size: 0.78rem; font-weight: 700; color: var(--primary-dark); }
-    .treat-popup-msg { margin-top: 12px; font-family: 'Caveat', cursive; font-size: 1.3rem; color: var(--primary); min-height: 28px; }
+    .treat-popup-msg { margin-top: 10px; font-family: 'Caveat', cursive; font-size: 1.25rem; color: var(--primary); min-height: 24px; }
 
     /* Wax Letter */
-    .letter-stage { width: 100%; margin-bottom: 26px; perspective: 1000px; }
+    .letter-stage { width: 100%; margin-bottom: 24px; }
     .envelope-3d {
       background: var(--glass-panel);
-      backdrop-filter: blur(18px);
-      border-radius: 28px;
-      padding: 24px 20px;
+      backdrop-filter: blur(14px);
+      border-radius: 26px;
+      padding: 22px 18px;
       border: 2px dashed rgba(255, 42, 109, 0.45);
-      box-shadow: 0 20px 45px rgba(255, 42, 109, 0.2);
+      box-shadow: 0 18px 40px rgba(255, 42, 109, 0.18);
       cursor: pointer;
+      touch-action: manipulation;
     }
     .wax-seal-3d {
-      width: 60px;
-      height: 60px;
+      width: 56px;
+      height: 56px;
       margin: 0 auto 10px;
       background: radial-gradient(circle at 35% 35%, #ff3b68, #a80029 78%);
       border-radius: 50%;
@@ -482,159 +403,132 @@
       justify-content: center;
       color: #ffe875;
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 900;
       border: 3px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 14px 26px rgba(168, 0, 41, 0.5);
+      box-shadow: 0 12px 22px rgba(168, 0, 41, 0.45);
     }
-    .envelope-tag { font-size: 0.92rem; color: var(--primary-dark); font-weight: 700; }
+    .envelope-tag { font-size: 0.9rem; color: var(--primary-dark); font-weight: 700; }
     .letter-parchment {
       display: none;
       background: #ffffff;
-      border-radius: 20px;
-      padding: 22px 18px;
-      margin-top: 16px;
+      border-radius: 18px;
+      padding: 20px 16px;
+      margin-top: 14px;
       text-align: left;
       border: 1.5px solid rgba(255, 204, 213, 0.9);
-      animation: unfold3D 0.45s ease forwards;
     }
-    @keyframes unfold3D { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    .letter-greeting { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--primary-dark); margin-bottom: 8px; }
-    .letter-body { font-size: 0.9rem; line-height: 1.75; color: #451b2e; margin-bottom: 10px; }
-    .letter-signature { font-family: 'Caveat', cursive; font-size: 1.55rem; color: var(--primary); text-align: right; }
+    .letter-greeting { font-family: 'Great Vibes', cursive; font-size: 2.1rem; color: var(--primary-dark); margin-bottom: 8px; }
+    .letter-body { font-size: 0.88rem; line-height: 1.7; color: #451b2e; margin-bottom: 10px; }
+    .letter-signature { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--primary); text-align: right; }
 
     /* Promises */
-    .promises-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin-bottom: 26px; }
+    .promises-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 24px; }
     @media (max-width: 460px) { .promises-grid { grid-template-columns: 1fr; } }
     .promise-card-3d {
       background: var(--glass-panel);
-      backdrop-filter: blur(14px);
-      padding: 18px 14px;
-      border-radius: 20px;
+      padding: 16px 12px;
+      border-radius: 18px;
       border: 1.5px solid var(--glass-border);
-      box-shadow: 0 12px 24px rgba(255, 42, 109, 0.12);
+      box-shadow: 0 10px 20px rgba(255, 42, 109, 0.1);
     }
-    .promise-icon { font-size: 2rem; margin-bottom: 6px; }
-    .promise-card-3d h3 { font-size: 0.92rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px; }
-    .promise-card-3d p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+    .promise-icon { font-size: 1.8rem; margin-bottom: 6px; }
+    .promise-card-3d h3 { font-size: 0.9rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px; }
+    .promise-card-3d p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
 
     /* Forgiveness Arena */
     .arena-card-3d {
       background: #ffffff;
-      border-radius: 30px;
-      padding: 32px 20px;
+      border-radius: 28px;
+      padding: 28px 18px;
       width: 100%;
-      box-shadow: 0 24px 50px rgba(255, 42, 109, 0.25);
+      box-shadow: 0 20px 45px rgba(255, 42, 109, 0.22);
       border: 1.5px solid rgba(255, 204, 213, 0.9);
       position: relative;
     }
-    .arena-title { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--primary-dark); margin-bottom: 6px; }
-    .arena-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; }
-    .button-arena { display: flex; justify-content: center; align-items: center; gap: 16px; position: relative; min-height: 75px; }
+    .arena-title { font-family: 'Playfair Display', serif; font-size: 1.45rem; color: var(--primary-dark); margin-bottom: 6px; }
+    .arena-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 22px; }
+    .button-arena { display: flex; justify-content: center; align-items: center; gap: 14px; position: relative; min-height: 70px; }
 
     .pushable-btn-yes {
       background: linear-gradient(180deg, #ff4d79 0%, #e60045 100%);
       color: #ffffff;
       border: none;
-      padding: 16px 32px;
+      padding: 15px 30px;
       border-radius: 50px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 6px 0 #9e002e, 0 16px 25px rgba(230, 0, 69, 0.45);
-      transition: all 0.15s ease;
+      box-shadow: 0 5px 0 #9e002e, 0 14px 22px rgba(230, 0, 69, 0.4);
+      touch-action: manipulation;
       z-index: 5;
     }
-    .pushable-btn-yes:active { transform: translateY(6px); box-shadow: 0 0 0 #9e002e; }
+    .pushable-btn-yes:active { transform: translateY(5px); box-shadow: 0 0 0 #9e002e; }
 
     .pushable-btn-no {
       background: linear-gradient(180deg, #ffffff 0%, #eceff3 100%);
       color: #555f6d;
       border: 1px solid #d3d8df;
-      padding: 14px 22px;
+      padding: 13px 20px;
       border-radius: 50px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 5px 0 #b0b7c1, 0 12px 18px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 0 #b0b7c1, 0 10px 16px rgba(0,0,0,0.06);
       position: relative;
-      transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       touch-action: manipulation;
     }
-    .pushable-btn-no:active { transform: translateY(5px); }
 
     /* ========================================================
-       PERFECTLY CENTERED, NON-SCROLL POPUPS (FIXED IN FRAME)
+       CENTERED, BULLETPROOF POPUPS (NEVER FREEZE WEBSITE)
        ======================================================== */
     .custom-modal {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh;
-      background: rgba(25, 4, 13, 0.78);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      z-index: 9999999;
+      width: 100%;
+      height: 100%;
+      background: rgba(20, 3, 10, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 999999;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 16px;
-      overflow-y: auto;
-      overscroll-behavior: contain;
+      padding: 20px;
     }
 
     .modal-card-3d {
       background: #ffffff;
-      max-width: 380px;
+      max-width: 360px;
       width: 100%;
-      border-radius: 28px;
-      padding: 30px 20px;
+      border-radius: 26px;
+      padding: 28px 20px;
       text-align: center;
-      box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 0 1.5px rgba(255, 204, 218, 0.9);
-      animation: pop3DIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      margin: auto;
-      max-height: 90vh;
-      max-height: 90dvh;
-      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+      border: 2px solid rgba(255, 204, 218, 0.9);
+      animation: popIn 0.3s ease-out forwards;
     }
 
-    @keyframes pop3DIn {
-      0% { transform: scale(0.65) translateY(20px); opacity: 0; }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    .modal-emoji {
-      font-size: 3.2rem;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 6px 12px var(--primary-glow));
-    }
-    .modal-card-3d h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--primary-dark);
-      margin-bottom: 8px;
-    }
-    .modal-card-3d p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-      margin-bottom: 20px;
-    }
+    .modal-emoji { font-size: 3rem; margin-bottom: 8px; }
+    .modal-card-3d h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--primary-dark); margin-bottom: 8px; }
+    .modal-card-3d p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 18px; }
 
     .tap-heart {
       position: fixed;
       pointer-events: none;
-      font-size: 1.8rem;
-      z-index: 99999;
-      animation: floatTap 1s ease-out forwards;
+      font-size: 1.6rem;
+      z-index: 9999;
+      animation: floatTap 0.9s ease-out forwards;
     }
     @keyframes floatTap {
       0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
-      100% { transform: translate(-50%, -120px) scale(1.4); opacity: 0; }
+      100% { transform: translate(-50%, -100px) scale(1.3); opacity: 0; }
     }
   </style>
 </head>
@@ -642,7 +536,6 @@
 
   <div class="glow-orb glow-orb-1"></div>
   <div class="glow-orb glow-orb-2"></div>
-  <div class="glow-orb glow-orb-3"></div>
 
   <canvas id="ambient-canvas"></canvas>
 
@@ -674,7 +567,7 @@
     </p>
 
     <!-- 3D Polaroid -->
-    <div class="tilt-stage" id="photoScene">
+    <div class="tilt-stage">
       <div class="polaroid-3d" id="photoCard">
         <div class="photo-viewport">
           <img src="https://files.catbox.moe/nnxb4h.jpg" alt="Holding my ear to say sorry" />
@@ -702,7 +595,6 @@
 
       <div class="meter-message" id="meterMsg">"Very angry right now! Choose a punishment below to cool down:"</div>
 
-      <div class="anger-actions-title">👇 Punish me to lower anger:</div>
       <div class="anger-actions-grid">
         <div class="punish-btn" onclick="executeAngerDrop(15, '🤏 Ouch! You pulled my cheeks hard... but you got a cute smile now!', '😤')">
           <span class="punish-icon">🤏</span>
@@ -730,35 +622,83 @@
       </div>
     </div>
 
-    <!-- 4 HEART BALLOONS -->
+    <!-- 4 LOVE BALLOONS STAGE -->
     <div class="balloon-game-box">
       <span class="game-badge">🎯 Mini Love Mission</span>
-      <h2 class="game-title">Blast The Heart Balloons!</h2>
-      <p class="game-desc">There are 4 hidden compliments for you inside. Tap a balloon to pop it with Cupid's bow & arrow! 🏹</p>
+      <h2 class="game-title">Blast The Love Balloons!</h2>
+      <p class="game-desc">There are 4 sweet compliments for you inside. Tap any heart balloon to blast it! 🏹</p>
 
-      <div class="balloons-arena" id="balloonArena">
-        <div class="balloon-item b-1" id="b1" onclick="popBalloon(1, event)">
-          <div class="balloon-heart"></div>
-          <div class="balloon-string"></div>
-          <span class="balloon-label">#1 Heart</span>
+      <div class="balloons-arena">
+        <!-- Love Balloon 1 -->
+        <div class="balloon-item b-1" id="b1" onclick="popBalloon(1)">
+          <svg class="love-balloon-svg" viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id="grad1" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#ff8da6" />
+                <stop offset="60%" stop-color="#ff1a53" />
+                <stop offset="100%" stop-color="#c90035" />
+              </radialGradient>
+            </defs>
+            <path d="M 50,88 C 20,62 5,42 5,26 C 5,11 16,3 30,3 C 39,3 46,9 50,16 C 54,9 61,3 70,3 C 84,3 95,11 95,26 C 95,42 80,62 50,88 Z" fill="url(#grad1)"/>
+            <path d="M 28,14 C 20,17 14,24 14,32" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.65"/>
+            <polygon points="47,88 53,88 50,94" fill="#c90035" />
+          </svg>
+          <div class="balloon-string-line"></div>
+          <span class="balloon-label">#1 Love</span>
         </div>
 
-        <div class="balloon-item b-2" id="b2" onclick="popBalloon(2, event)">
-          <div class="balloon-heart"></div>
-          <div class="balloon-string"></div>
-          <span class="balloon-label">#2 Heart</span>
+        <!-- Love Balloon 2 -->
+        <div class="balloon-item b-2" id="b2" onclick="popBalloon(2)">
+          <svg class="love-balloon-svg" viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id="grad2" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#ffa3b5" />
+                <stop offset="60%" stop-color="#ff2e70" />
+                <stop offset="100%" stop-color="#b8003b" />
+              </radialGradient>
+            </defs>
+            <path d="M 50,88 C 20,62 5,42 5,26 C 5,11 16,3 30,3 C 39,3 46,9 50,16 C 54,9 61,3 70,3 C 84,3 95,11 95,26 C 95,42 80,62 50,88 Z" fill="url(#grad2)"/>
+            <path d="M 28,14 C 20,17 14,24 14,32" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.65"/>
+            <polygon points="47,88 53,88 50,94" fill="#b8003b" />
+          </svg>
+          <div class="balloon-string-line"></div>
+          <span class="balloon-label">#2 Love</span>
         </div>
 
-        <div class="balloon-item b-3" id="b3" onclick="popBalloon(3, event)">
-          <div class="balloon-heart"></div>
-          <div class="balloon-string"></div>
-          <span class="balloon-label">#3 Heart</span>
+        <!-- Love Balloon 3 -->
+        <div class="balloon-item b-3" id="b3" onclick="popBalloon(3)">
+          <svg class="love-balloon-svg" viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id="grad3" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#ff7597" />
+                <stop offset="60%" stop-color="#e60049" />
+                <stop offset="100%" stop-color="#99002f" />
+              </radialGradient>
+            </defs>
+            <path d="M 50,88 C 20,62 5,42 5,26 C 5,11 16,3 30,3 C 39,3 46,9 50,16 C 54,9 61,3 70,3 C 84,3 95,11 95,26 C 95,42 80,62 50,88 Z" fill="url(#grad3)"/>
+            <path d="M 28,14 C 20,17 14,24 14,32" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.65"/>
+            <polygon points="47,88 53,88 50,94" fill="#99002f" />
+          </svg>
+          <div class="balloon-string-line"></div>
+          <span class="balloon-label">#3 Love</span>
         </div>
 
-        <div class="balloon-item b-4" id="b4" onclick="popBalloon(4, event)">
-          <div class="balloon-heart"></div>
-          <div class="balloon-string"></div>
-          <span class="balloon-label">#4 Heart</span>
+        <!-- Love Balloon 4 -->
+        <div class="balloon-item b-4" id="b4" onclick="popBalloon(4)">
+          <svg class="love-balloon-svg" viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id="grad4" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#ffb8c7" />
+                <stop offset="60%" stop-color="#ff1464" />
+                <stop offset="100%" stop-color="#c40041" />
+              </radialGradient>
+            </defs>
+            <path d="M 50,88 C 20,62 5,42 5,26 C 5,11 16,3 30,3 C 39,3 46,9 50,16 C 54,9 61,3 70,3 C 84,3 95,11 95,26 C 95,42 80,62 50,88 Z" fill="url(#grad4)"/>
+            <path d="M 28,14 C 20,17 14,24 14,32" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.65"/>
+            <polygon points="47,88 53,88 50,94" fill="#c40041" />
+          </svg>
+          <div class="balloon-string-line"></div>
+          <span class="balloon-label">#4 Love</span>
         </div>
       </div>
 
@@ -796,7 +736,7 @@
 
     <!-- Wax Letter -->
     <div class="letter-stage">
-      <div class="envelope-3d" id="envelopeBox">
+      <div class="envelope-3d" onclick="toggleLetter()">
         <div class="wax-seal-3d">S</div>
         <div class="envelope-tag" id="envelopeHint">✉️ Tap here to open my personal letter for you</div>
         
@@ -846,15 +786,15 @@
       <p class="arena-sub">Even if you are still a tiny bit mad... do I get one more hug? 🥺</p>
       
       <div class="button-arena">
-        <button class="pushable-btn-yes" id="btnYes">Yes, I Forgive You ❤️</button>
-        <button class="pushable-btn-no" id="btnNo">No, Still Mad 😤</button>
+        <button class="pushable-btn-yes" id="btnYes" onclick="onForgiveClick()">Yes, I Forgive You ❤️</button>
+        <button class="pushable-btn-no" id="btnNo" onclick="handleDodge(event)" ontouchstart="handleDodge(event)">No, Still Mad 😤</button>
       </div>
     </div>
 
   </div>
 
   <!-- Compliment Balloon Pop Modal -->
-  <div class="custom-modal" id="complimentModal">
+  <div class="custom-modal" id="complimentModal" onclick="closeOnBackdrop(event, 'complimentModal')">
     <div class="modal-card-3d">
       <div class="modal-emoji" id="popEmoji">🎈💥</div>
       <h2 id="popTitle">Balloon Popped!</h2>
@@ -863,20 +803,20 @@
     </div>
   </div>
 
-  <!-- Perfectly Framed Acceptance Modal -->
-  <div class="custom-modal" id="successModal">
+  <!-- Acceptance Modal -->
+  <div class="custom-modal" id="successModal" onclick="closeOnBackdrop(event, 'successModal')">
     <div class="modal-card-3d">
       <div class="modal-emoji">💖🥰✨</div>
       <h2>Thank You, Shinthiya!</h2>
       <p>
         Your forgiveness is the most precious gift in the entire world. I promise to treasure your heart and treat you with all the love, patience, and gentleness you deserve!
       </p>
-      <button class="pushable-btn-yes" id="closeModalBtn">Big Hug Accepted 🤗</button>
+      <button class="pushable-btn-yes" onclick="closeSuccessModal()">Big Hug Accepted 🤗</button>
     </div>
   </div>
 
   <script>
-    /* GLOBAL AUDIO PLAYBACK */
+    /* AUDIO CONTROLLER */
     const music = document.getElementById('bg-music');
     const musicTitle = document.getElementById('musicTitle');
     const musicIcon = document.getElementById('musicIcon');
@@ -884,7 +824,7 @@
     const musicWidget = document.getElementById('musicWidget');
     let isPlaying = false;
 
-    function playAudio() {
+    function startMusic() {
       if (isPlaying) return;
       music.volume = 0.6;
       music.play().then(() => {
@@ -892,15 +832,13 @@
         musicIcon.textContent = '⏸️';
         musicTitle.textContent = 'Playing';
         soundBars.classList.add('playing');
-      }).catch(err => {
-        console.warn("Audio interaction pending:", err);
-      });
+      }).catch(() => {});
     }
 
-    function toggleMusic(e) {
-      if (e) e.stopPropagation();
+    musicWidget.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (!isPlaying) {
-        playAudio();
+        startMusic();
       } else {
         music.pause();
         isPlaying = false;
@@ -908,33 +846,31 @@
         musicTitle.textContent = 'Play Music';
         soundBars.classList.remove('playing');
       }
-    }
-
-    musicWidget.addEventListener('click', toggleMusic);
-
-    ['click', 'touchstart', 'pointerdown'].forEach(evt => {
-      window.addEventListener(evt, () => {
-        if (!isPlaying) playAudio();
-      }, { passive: true });
     });
 
-    /* Tap Heart Burst Effect */
-    window.addEventListener('click', (e) => {
-      if (e.target.tagName !== 'BUTTON' && !e.target.closest('.modal-card-3d')) {
+    // Gentle global tap sound trigger without interfering with buttons
+    document.addEventListener('pointerdown', () => {
+      if (!isPlaying) startMusic();
+    }, { once: true });
+
+    /* TAP HEART BURST */
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON' && !e.target.closest('.custom-modal')) {
         const heart = document.createElement('div');
         heart.className = 'tap-heart';
         heart.textContent = ['💖', '🌸', '✨', '🥺', '💕'][Math.floor(Math.random() * 5)];
         heart.style.left = e.clientX + 'px';
         heart.style.top = e.clientY + 'px';
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
+        setTimeout(() => heart.remove(), 900);
       }
     });
 
-    /* RAAG METER LOGIC */
+    /* ANGER METER */
     let currentAnger = 100;
 
     function executeAngerDrop(amount, funnyText, moodEmoji) {
+      startMusic();
       currentAnger = Math.max(0, currentAnger - amount);
       const fill = document.getElementById('angerFill');
       const text = document.getElementById('angerText');
@@ -959,37 +895,29 @@
         mood.textContent = '🥰';
         text.textContent = '0% Mad (100% Love ❤️)';
         msg.textContent = '🎉 All anger melted! Only unconditional hugs left! 🤗';
-        if (typeof confetti === 'function') {
-          confetti({ particleCount: 70, spread: 70 });
-        }
+        if (typeof confetti === 'function') confetti({ particleCount: 60, spread: 60 });
       }
-
-      const card = document.getElementById('photoCard');
-      card.style.transform = 'rotateX(8deg) rotateY(-8deg) scale(0.96)';
-      setTimeout(() => {
-        card.style.transform = 'rotateX(4deg) rotateY(0deg) translateZ(10px)';
-      }, 300);
     }
 
-    /* BALLOONS LOGIC */
+    /* 4 LOVE BALLOONS & COMPLIMENT POPUP */
     const compliments = {
       1: {
-        title: "Balloon #1 Compliment 💖",
+        title: "Love Balloon #1 💖",
         text: "Your smile is genuinely my favorite thing in the universe. When you smile at me, all my stress completely vanishes!",
         emoji: "😍✨"
       },
       2: {
-        title: "Balloon #2 Compliment 🌸",
+        title: "Love Balloon #2 🌸",
         text: "You have the kindest, softest heart, Shinthiya. Even when you are upset, you still care so deeply—and I love that about you.",
-        emoji: "🥺❤️"
+        emoji: "🥺❤️️"
       },
       3: {
-        title: "Balloon #3 Compliment 👑",
+        title: "Love Balloon #3 👑",
         text: "You are effortlessly beautiful inside and out. No matter what, you will always be the most stunning person in my eyes.",
         emoji: "🥰✨"
       },
       4: {
-        title: "Balloon #4 Compliment 🌟",
+        title: "Love Balloon #4 🌟",
         text: "Being with you makes me want to be the best version of myself. I am so lucky to have you in my life, and I'll never let you go.",
         emoji: "🫂💍"
       }
@@ -998,65 +926,60 @@
     let poppedCount = 0;
     const poppedBalloons = {};
 
-    function popBalloon(id, event) {
+    function popBalloon(id) {
       if (poppedBalloons[id]) return;
       poppedBalloons[id] = true;
       poppedCount++;
+      startMusic();
 
       const balloonElem = document.getElementById('b' + id);
       const rect = balloonElem.getBoundingClientRect();
-      const targetX = rect.left + rect.width / 2;
-      const targetY = rect.top + rect.height / 2;
+      const originX = (rect.left + rect.width / 2) / window.innerWidth;
+      const originY = (rect.top + rect.height / 2) / window.innerHeight;
 
-      const arrow = document.createElement('div');
-      arrow.className = 'flying-arrow';
-      arrow.textContent = '🏹';
-      arrow.style.left = (window.innerWidth / 2) + 'px';
-      arrow.style.top = (window.innerHeight - 80) + 'px';
-      document.body.appendChild(arrow);
+      // Burst confetti directly from balloon
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 45,
+          spread: 55,
+          origin: { x: originX, y: originY }
+        });
+      }
+
+      // Animate balloon burst
+      balloonElem.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+      balloonElem.style.transform = 'scale(1.3)';
+      balloonElem.style.opacity = '0';
 
       setTimeout(() => {
-        arrow.style.left = targetX + 'px';
-        arrow.style.top = targetY + 'px';
-      }, 20);
+        balloonElem.style.visibility = 'hidden';
+        
+        // Show compliment modal
+        const data = compliments[id];
+        document.getElementById('popEmoji').textContent = data.emoji;
+        document.getElementById('popTitle').textContent = data.title;
+        document.getElementById('popText').textContent = data.text;
+        document.getElementById('complimentModal').style.display = 'flex';
 
-      setTimeout(() => {
-        arrow.remove();
-        balloonElem.style.transition = 'transform 0.2s, opacity 0.2s';
-        balloonElem.style.transform = 'scale(1.4)';
-        balloonElem.style.opacity = '0';
-
-        if (typeof confetti === 'function') {
-          confetti({
-            particleCount: 50,
-            spread: 60,
-            origin: { x: targetX / window.innerWidth, y: targetY / window.innerHeight }
-          });
-        }
-
-        setTimeout(() => {
-          balloonElem.style.display = 'none';
-          showComplimentModal(id);
-          executeAngerDrop(15, '🎈 Balloon popped! Compliment delivered straight to your heart!', '🥰');
-        }, 220);
+        executeAngerDrop(15, '🎈 Balloon popped! Compliment unlocked for your heart!', '🥰');
 
         const remaining = 4 - poppedCount;
         document.getElementById('balloonStatus').textContent = remaining > 0 ? `${remaining} Balloons Left` : 'All Compliments Unlocked! 🎉';
-      }, 370);
-    }
-
-    function showComplimentModal(id) {
-      const data = compliments[id];
-      document.getElementById('popEmoji').textContent = data.emoji;
-      document.getElementById('popTitle').textContent = data.title;
-      document.getElementById('popText').textContent = data.text;
-      document.body.classList.add('modal-open');
-      document.getElementById('complimentModal').style.display = 'flex';
+      }, 180);
     }
 
     function closeComplimentModal() {
-      document.body.classList.remove('modal-open');
       document.getElementById('complimentModal').style.display = 'none';
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').style.display = 'none';
+    }
+
+    function closeOnBackdrop(e, modalId) {
+      if (e.target.id === modalId) {
+        document.getElementById(modalId).style.display = 'none';
+      }
     }
 
     /* Peace Treats */
@@ -1065,45 +988,21 @@
       executeAngerDrop(15, msg, '😋');
     }
 
-    /* 3D Tilt */
-    const scene = document.getElementById('photoScene');
-    const card = document.getElementById('photoCard');
-
-    function handle3DTilt(x, y) {
-      const rect = scene.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const rotateX = ((y - centerY) / (rect.height / 2)) * -14;
-      const rotateY = ((x - centerX) / (rect.width / 2)) * 14;
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px)`;
+    /* Letter Toggle */
+    function toggleLetter() {
+      startMusic();
+      const content = document.getElementById('letterContent');
+      const hint = document.getElementById('envelopeHint');
+      if (content.style.display !== 'block') {
+        content.style.display = 'block';
+        hint.textContent = '💌 Written with all my sincerity:';
+      } else {
+        content.style.display = 'none';
+        hint.textContent = '✉️ Tap here to open my personal letter for you';
+      }
     }
 
-    window.addEventListener('mousemove', (e) => handle3DTilt(e.clientX, e.clientY));
-    scene.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) handle3DTilt(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-    scene.addEventListener('touchend', () => {
-      card.style.transform = 'rotateX(4deg) rotateY(0deg) translateZ(10px)';
-    });
-
-    /* Accordion Letter */
-    const envelopeBox = document.getElementById('envelopeBox');
-    const letterContent = document.getElementById('letterContent');
-    const envelopeHint = document.getElementById('envelopeHint');
-
-    envelopeBox.addEventListener('click', function() {
-      if (letterContent.style.display !== 'block') {
-        letterContent.style.display = 'block';
-        envelopeHint.textContent = '💌 Written with all my sincerity:';
-      } else {
-        letterContent.style.display = 'none';
-        envelopeHint.textContent = '✉️ Tap here to open my personal letter for you';
-      }
-    });
-
     /* 3D Dodge Runaway Button */
-    const btnNo = document.getElementById('btnNo');
-    const btnYes = document.getElementById('btnYes');
     let dodgeCount = 0;
     const dodgePhrases = [
       "Are you sure? 🥺",
@@ -1115,43 +1014,34 @@
     ];
 
     function handleDodge(e) {
-      if (e) e.preventDefault();
-      const randomX = (Math.random() - 0.5) * 180;
-      const randomY = (Math.random() - 0.5) * 110;
-      btnNo.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.95)`;
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      startMusic();
+      const btnNo = document.getElementById('btnNo');
+      const btnYes = document.getElementById('btnYes');
+
+      const randomX = (Math.random() - 0.5) * 160;
+      const randomY = (Math.random() - 0.5) * 90;
+      btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
       btnNo.textContent = dodgePhrases[dodgeCount % dodgePhrases.length];
       dodgeCount++;
 
       const currentScale = 1 + (dodgeCount * 0.08);
-      btnYes.style.transform = `scale(${Math.min(currentScale, 1.35)})`;
+      btnYes.style.transform = `scale(${Math.min(currentScale, 1.3)})`;
     }
 
-    btnNo.addEventListener('touchstart', handleDodge, { passive: false });
-    btnNo.addEventListener('click', handleDodge);
-
-    /* ========================================================
-       YES BUTTON: OPENS INSTANTLY IN DIRECT CENTER OF VIEWPORT
-       ======================================================== */
-    btnYes.addEventListener('click', function() {
-      const modal = document.getElementById('successModal');
-      document.body.classList.add('modal-open');
-      modal.style.display = 'flex';
-
+    /* YES BUTTON */
+    function onForgiveClick() {
+      startMusic();
+      document.getElementById('successModal').style.display = 'flex';
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 140, spread: 85, origin: { y: 0.5 } });
-        setTimeout(() => {
-          confetti({ particleCount: 90, angle: 60, spread: 60, origin: { x: 0, y: 0.5 } });
-          confetti({ particleCount: 90, angle: 120, spread: 60, origin: { x: 1, y: 0.5 } });
-        }, 260);
+        confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
       }
-    });
+    }
 
-    document.getElementById('closeModalBtn').addEventListener('click', function() {
-      document.body.classList.remove('modal-open');
-      document.getElementById('successModal').style.display = 'none';
-    });
-
-    /* Particle Canvas */
+    /* Ambient Floating Particles */
     const canvas = document.getElementById('ambient-canvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -1163,17 +1053,17 @@
     });
 
     const items = [];
-    const symbols = ['❤️', '🌸', '✨', '💖', '💫'];
+    const symbols = ['❤️', '🌸', '✨', '💖'];
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 18; i++) {
       items.push({
         x: Math.random() * width,
         y: Math.random() * height,
         symbol: symbols[Math.floor(Math.random() * symbols.length)],
-        size: Math.random() * 12 + 12,
-        speedY: Math.random() * 0.8 + 0.3,
-        speedX: Math.random() * 0.6 - 0.3,
-        opacity: Math.random() * 0.5 + 0.3
+        size: Math.random() * 10 + 12,
+        speedY: Math.random() * 0.7 + 0.3,
+        speedX: Math.random() * 0.4 - 0.2,
+        opacity: Math.random() * 0.4 + 0.3
       });
     }
 
@@ -1182,7 +1072,7 @@
       items.forEach(it => {
         it.y -= it.speedY;
         it.x += it.speedX;
-        if (it.y < -30) {
+        if (it.y < -20) {
           it.y = height + 20;
           it.x = Math.random() * width;
         }
