@@ -36,6 +36,11 @@
       position: relative;
     }
 
+    body.modal-open {
+      overflow: hidden !important;
+      touch-action: none;
+    }
+
     #ambient-canvas {
       position: fixed;
       top: 0;
@@ -322,9 +327,7 @@
       transform: translate(-50%, -50%) rotate(-45deg);
     }
 
-    /* ========================================================
-       NEW SUPER-PLAYFUL MULTI-ACTION RAAG (ANGER) METER
-       ======================================================== */
+    /* RAAG (ANGER) METER */
     .anger-widget {
       width: 100%;
       background: #ffffff;
@@ -384,7 +387,6 @@
       font-weight: 700;
     }
 
-    /* Playful Anger-Reducing Actions Grid */
     .anger-actions-title {
       font-size: 0.78rem;
       font-weight: 700;
@@ -516,7 +518,7 @@
     .promise-card-3d h3 { font-size: 0.92rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px; }
     .promise-card-3d p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
 
-    /* Arena */
+    /* Forgiveness Arena */
     .arena-card-3d {
       background: #ffffff;
       border-radius: 30px;
@@ -561,35 +563,67 @@
     }
     .pushable-btn-no:active { transform: translateY(5px); }
 
-    /* Modals */
+    /* ========================================================
+       PERFECTLY CENTERED, NON-SCROLL POPUPS (FIXED IN FRAME)
+       ======================================================== */
     .custom-modal {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(30, 8, 18, 0.72);
-      backdrop-filter: blur(14px);
-      z-index: 999999;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: rgba(25, 4, 13, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 9999999;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
     }
+
     .modal-card-3d {
       background: #ffffff;
-      max-width: 400px;
+      max-width: 380px;
       width: 100%;
-      border-radius: 30px;
-      padding: 34px 22px;
+      border-radius: 28px;
+      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 35px 80px rgba(0,0,0,0.45);
-      animation: pop3D 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 0 1.5px rgba(255, 204, 218, 0.9);
+      animation: pop3DIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      margin: auto;
+      max-height: 90vh;
+      max-height: 90dvh;
+      overflow-y: auto;
     }
-    @keyframes pop3D {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+
+    @keyframes pop3DIn {
+      0% { transform: scale(0.65) translateY(20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
     }
-    .modal-emoji { font-size: 3.5rem; margin-bottom: 12px; }
-    .modal-card-3d h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--primary-dark); margin-bottom: 10px; }
-    .modal-card-3d p { font-size: 0.94rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 22px; }
+
+    .modal-emoji {
+      font-size: 3.2rem;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 6px 12px var(--primary-glow));
+    }
+    .modal-card-3d h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+    .modal-card-3d p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
 
     .tap-heart {
       position: fixed;
@@ -652,9 +686,7 @@
       </div>
     </div>
 
-    <!-- ==============================================
-         NEW: SUPER PLAYFUL MULTI-ACTION ANGER METER
-         ============================================== -->
+    <!-- ANGER METER -->
     <div class="anger-widget">
       <div class="anger-header">
         <div class="anger-title">
@@ -698,7 +730,7 @@
       </div>
     </div>
 
-    <!-- 4 HEART BALLOONS STAGE -->
+    <!-- 4 HEART BALLOONS -->
     <div class="balloon-game-box">
       <span class="game-badge">🎯 Mini Love Mission</span>
       <h2 class="game-title">Blast The Heart Balloons!</h2>
@@ -831,13 +863,13 @@
     </div>
   </div>
 
-  <!-- Final Modal -->
+  <!-- Perfectly Framed Acceptance Modal -->
   <div class="custom-modal" id="successModal">
     <div class="modal-card-3d">
       <div class="modal-emoji">💖🥰✨</div>
       <h2>Thank You, Shinthiya!</h2>
       <p>
-        Your forgiveness is the most precious gift. I promise to treasure your heart and treat you with all the love and gentleness you deserve!
+        Your forgiveness is the most precious gift in the entire world. I promise to treasure your heart and treat you with all the love, patience, and gentleness you deserve!
       </p>
       <button class="pushable-btn-yes" id="closeModalBtn">Big Hug Accepted 🤗</button>
     </div>
@@ -861,7 +893,7 @@
         musicTitle.textContent = 'Playing';
         soundBars.classList.add('playing');
       }).catch(err => {
-        console.warn("Audio waiting:", err);
+        console.warn("Audio interaction pending:", err);
       });
     }
 
@@ -888,7 +920,7 @@
 
     /* Tap Heart Burst Effect */
     window.addEventListener('click', (e) => {
-      if (e.target.tagName !== 'BUTTON') {
+      if (e.target.tagName !== 'BUTTON' && !e.target.closest('.modal-card-3d')) {
         const heart = document.createElement('div');
         heart.className = 'tap-heart';
         heart.textContent = ['💖', '🌸', '✨', '🥺', '💕'][Math.floor(Math.random() * 5)];
@@ -899,9 +931,7 @@
       }
     });
 
-    /* ========================================================
-       NEW SUPER PLAYFUL ANGER METER LOGIC
-       ======================================================== */
+    /* RAAG METER LOGIC */
     let currentAnger = 100;
 
     function executeAngerDrop(amount, funnyText, moodEmoji) {
@@ -916,7 +946,6 @@
       msg.textContent = funnyText;
       mood.textContent = moodEmoji;
 
-      // Color Shift based on anger state
       if (currentAnger > 65) {
         fill.style.background = 'linear-gradient(90deg, #ff0044, #ff5e00)';
       } else if (currentAnger > 30) {
@@ -935,7 +964,6 @@
         }
       }
 
-      // Playful wiggle on photo
       const card = document.getElementById('photoCard');
       card.style.transform = 'rotateX(8deg) rotateY(-8deg) scale(0.96)';
       setTimeout(() => {
@@ -1022,10 +1050,12 @@
       document.getElementById('popEmoji').textContent = data.emoji;
       document.getElementById('popTitle').textContent = data.title;
       document.getElementById('popText').textContent = data.text;
+      document.body.classList.add('modal-open');
       document.getElementById('complimentModal').style.display = 'flex';
     }
 
     function closeComplimentModal() {
+      document.body.classList.remove('modal-open');
       document.getElementById('complimentModal').style.display = 'none';
     }
 
@@ -1099,19 +1129,25 @@
     btnNo.addEventListener('touchstart', handleDodge, { passive: false });
     btnNo.addEventListener('click', handleDodge);
 
-    /* Yes Button */
+    /* ========================================================
+       YES BUTTON: OPENS INSTANTLY IN DIRECT CENTER OF VIEWPORT
+       ======================================================== */
     btnYes.addEventListener('click', function() {
-      document.getElementById('successModal').style.display = 'flex';
+      const modal = document.getElementById('successModal');
+      document.body.classList.add('modal-open');
+      modal.style.display = 'flex';
+
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 140, spread: 85, origin: { y: 0.6 } });
+        confetti({ particleCount: 140, spread: 85, origin: { y: 0.5 } });
         setTimeout(() => {
-          confetti({ particleCount: 90, angle: 60, spread: 60, origin: { x: 0 } });
-          confetti({ particleCount: 90, angle: 120, spread: 60, origin: { x: 1 } });
+          confetti({ particleCount: 90, angle: 60, spread: 60, origin: { x: 0, y: 0.5 } });
+          confetti({ particleCount: 90, angle: 120, spread: 60, origin: { x: 1, y: 0.5 } });
         }, 260);
       }
     });
 
     document.getElementById('closeModalBtn').addEventListener('click', function() {
+      document.body.classList.remove('modal-open');
       document.getElementById('successModal').style.display = 'none';
     });
 
